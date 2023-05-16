@@ -29,7 +29,7 @@ class PipelineCdkStack(Stack):
             owner="jessehsiao",
             repo="AboardBook-Backend",
             # oauth_token=cdk.SecretValue.secrets_manager("github-AboardBook"),
-            oauthToken = cdk.SecretValue.plainText("my-github-token-AboardBook")
+            oauthToken = cdk.SecretValue.plainText("my-github-token-AboardBook"), 
             branch="main"
         )
 

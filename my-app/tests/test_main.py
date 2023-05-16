@@ -13,8 +13,9 @@ def client(app):
 def test_health_status_code(app, client): 
     res = client.get('/healthcheck')
     assert res.status_code == 200
-    expected = {'health_status': 'OK'}
+    expected = {'health_status': 'Good'}
     assert expected == json.loads(res.get_data(as_text=True))
+
 
 def test_main_status_code(app, client):
     res = client.get('/')

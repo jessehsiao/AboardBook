@@ -1,2 +1,2 @@
-# AboardBook-Backend
-This is the Backend of aboard book
+# AboardBook
+This is aboard book

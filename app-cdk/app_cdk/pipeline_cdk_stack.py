@@ -35,7 +35,7 @@ class PipelineCdkStack(Stack):
 
         codeQualityBuild = codebuild.PipelineProject(
             self, "Code Quality",
-            build_spec=codebuild.BuildSpec.from_source_filename("./buildspec_test.yml"),
+            build_spec=codebuild.BuildSpec.from_source_filename("./Backend/buildspec_test.yml"),
             environment=codebuild.BuildEnvironment(
                 build_image=codebuild.LinuxBuildImage.AMAZON_LINUX_2_4,
                 privileged=True,

@@ -1,38 +1,129 @@
-.App {
+/* Home page --------------------------*/
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --theme-pink: #DABEA7;
+  --theme-purple: #9b6954;
+  --theme-dark-purple: #635042;
+  --theme-black: #0f0b2b;
+  --theme-light-grey: #fefeff;
+  --theme-extra-light: #efddcf;
+  --theme-shadow: #e8fff6;
+  --shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: 14px Arial, sans-serif;
+  background: var(--theme-light-grey);
+  overflow: visible;
+  overflow-y: auto;
+  color: #000;
+}
+
+h1 {
+  font-size: 2.2em;
+  font-weight: bold;
+  color:var(--theme-dark-purple);
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color:var(--theme-dark-purple);
+  }
+  
+  h2 {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  h3 {
+    font-size: 1em;
+    font-weight: bold;
+  }
+}
+
+
+/* General CSS  (everyone can use) --------*/
+.card-shadow{
+  border: var(--theme-light-grey) solid 0.1em;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  background-color: var(--theme-extra-light);
+}
+
+/* 按鈕有跳動效果 */
+.Btn:hover {
+  background-color: var(--theme-purple);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.general-button {
+  width: 80px;
+  height: 40px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #ebe9f0;
+  background-color: var(--theme-dark-purple);
+  border: var(--theme-pink) solid 1px;
+  border-radius: 3px;
+  box-shadow: 0px 1px 2.5px 1px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  position: initial;
   }
+
+/* 右下角的紫色按鈕 */
+.form-buttons{
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: 3%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.form-button {
+  all: unset;
+  background-color: var(--theme-dark-purple);
+  border-radius: 0.4em;
+  width: 6em;
+  height: 2.5em;
+  font-weight: 500;
+  text-align: center;
+  margin:0.5em;
+  color: #FFFFFF;
 }
 
-.App-link {
-  color: #61dafb;
+/* 輸入框 */
+
+.input-columns {
+  width: 60%;
+  height: 40px;
+  border: var(--theme-light-grey) solid 1.5px;
+  border-radius: 4px;
+  outline-style: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.input-columns:focus {
+  border: var(--theme-purple) solid 2px;
 }

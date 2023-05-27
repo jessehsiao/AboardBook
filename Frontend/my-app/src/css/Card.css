@@ -1,0 +1,142 @@
+/* Card --------------------------*/
+
+.card {
+    width: 250px;
+    height: 500px;
+    border-radius: 0.5em;
+    padding: 0.8em;
+    margin: 0.8em 0.2em;
+    display: flex;
+    flex-direction: column;
+    background-color: hsl(0, 0%, 100%);
+    /* transform: translate(20px, 20px); */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+
+.card-form-title{
+    width: 100%;
+    height:25%;
+    /* white-space: nowrap;  */
+    overflow: hidden;
+    text-overflow: ellipsis ellipsis; 
+    /* border: 1px solid #000000; */
+    color: var(--theme-dark-purple);
+    font-weight: 600;
+
+}
+
+.prize-tag {
+    width: max-content;
+    padding: 0.2em 0.8em;
+    margin-bottom: 1em;
+    background-color: var(--theme-purple);
+    color: #ffffff;
+    border-radius: 1em;
+}
+
+.pink {
+    background-color: var(--theme-pink);
+}
+
+.black {
+    background-color: black;
+}
+
+
+.share-image {
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.share-q {
+    all: unset;
+    width: 2em;
+    height: 2em;
+    /* border: var(--theme-purple) solid 0.4em; */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 0.5em;
+    text-align: center;
+    font-weight: 600;
+}
+
+
+.share-q:hover{
+    background-color: var(--theme-light-grey);
+}
+
+.q-image{
+    width: 90%;
+    height: 40%;
+    align-self: center;
+}
+
+.empty-card {
+    width: 17%;
+    border-radius: 0.5em;
+    padding: 0.8em;
+    margin: 0.8em 0.2em;
+    display: flex;
+    flex-direction: column;
+    /* background-color: #ffffff; */
+    /* transform: translate(20px, 20px); */
+}
+
+@media only screen and (max-width: 600px) {
+    .card {
+        width: 100%;
+    }
+}
+
+.prize-tag-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.card-dropdown-option {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-grow: 1;
+    font-weight: 700;
+    cursor: pointer;
+    color:var(--theme-dark-purple);
+}
+
+
+.card-dropdown-options{
+    display: none;
+    position: absolute;
+    top: -3em;
+    width: 3em;
+    height: 5em;
+    background-color: var(--theme-extra-light);
+    box-shadow: var(--shadow);
+    transform: translateY(4.5em);
+}
+
+.card-dropdown:hover .user-dropdown-options {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.card-dropdown-options > * {
+    all: unset;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:rgb(75, 71, 71);
+    font-weight: 500;
+}
+
+.card-dropdown-options > *:hover {
+    color: var(--theme-purple);
+} 

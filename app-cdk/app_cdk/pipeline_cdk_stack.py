@@ -14,7 +14,7 @@ class PipelineCdkStack(Stack):
 
         # Create a new CodePipeline called CICD_Pipeline
         pipeline = codepipeline.Pipeline (
-            self, "AboardBook_Backend_CICD_Pipeline",
+            self, "AboardBook_CICD_Pipeline",
             cross_account_keys = False
         )
 
@@ -28,7 +28,7 @@ class PipelineCdkStack(Stack):
             output=source_output,
             owner="jessehsiao",
             repo="AboardBook",
-            oauth_token=cdk.SecretValue.secrets_manager("arn:aws:secretsmanager:ap-northeast-1:207600944624:secret:github-AboardBook-kOSO9c"),
+            oauth_token=cdk.SecretValue.secrets_manager("arn:aws:secretsmanager:ap-northeast-1:273214402619:secret:github-AboardBook-Ysp7nz"),
             # oauthToken = cdk.SecretValue.plainText("my-github-token-AboardBook"), 
             branch="main"
         )

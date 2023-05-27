@@ -1,0 +1,33 @@
+/* Fill-in page --------------------------*/
+.questions {
+    padding: 0.8em;
+    margin: 0.8em 0em;
+    display: flex;
+    flex-direction: column;
+}
+
+.question-card {
+    width:80%;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+label { 
+    display: block; 
+    width: 100%; 
+}
+
+.form-description{
+    padding: 0.8em;
+    width:100%;
+    border: var(--theme-light-grey) solid 1.5px;
+    border-radius: 4px;
+    background-color: var(--theme-light-grey);
+    outline-style: none;
+}
+
+.alert{
+    background-color: var(--theme-pink);
+}
+

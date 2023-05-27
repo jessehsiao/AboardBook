@@ -1,0 +1,142 @@
+/* Lottery page ---------------------------------------------------*/
+
+/* whole lottery page */
+.lottery-page-container{
+    display:flex;
+    flex-direction: column;
+}
+
+
+/* left-hand side */
+.lottery-container{
+    display:flex;
+    flex-direction: row;
+    margin-bottom: 10%;
+    width:100%;
+}
+
+.lottery-results{
+    height: 100%;
+    width: 60%;
+    margin: 0 1% 1em 5%;
+    padding: 0.5em 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+/* .lottery-results > h2{
+    font-size: 2em;
+    font-weight: bold;
+    color:#0f0b2b;
+} */
+
+/* 用戶框架 */
+.avator{
+    width: 6em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1em;
+    /* margin: 1em; */
+    font-size: 1em;
+    font-weight: 600;
+    /* background-color: var(--theme-light-grey); */
+}
+
+/* 用戶照片 */
+.avator-image{
+    width: 5.5em;
+    margin: 0em;
+    border-radius: 100%;
+    border: var(--theme-light-grey) solid 0.1em;
+    box-shadow: var(--shadow);
+}
+
+/* 橫向用戶照片 */
+.avator-container{
+    display: flex;
+    justify-content: left;
+}
+
+/* 獎品照片 */
+.prize-image {
+    width: 40%;
+    border-radius: 0.5em;
+    border: var(--theme-light-grey) solid 0.1em;
+    box-shadow: var(--shadow);
+}
+
+/* 獎品與中獎者框框 */
+.lottery-card {
+    padding: 0.8em;
+    margin: 0.8em 0em;
+    display: flex;
+    flex-direction: column;
+}
+
+/* .lottery-card > h2{
+    font-size: 1.2em;
+    font-weight: bold;
+} */
+
+/* 基本表單資訊 */
+.form-info{
+    height: 100%;
+    width: 40%;
+    margin: 0 5% 1em 0;
+    padding: 0.5em 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+/* .form-info > h2{
+    color:#0f0b2b;
+    font-size: 2em;
+    font-weight: bold;
+} */
+
+/* 獎品資訊 */
+.prize-container{
+    display: flex;
+    /* justify-content: left; */
+    flex-direction: column;
+    margin-bottom: 1em; 
+    align-items: left;
+    width:100%;
+}
+
+.send-email-btn{
+    border: var(--theme-purple) solid 2px;
+    border-radius: 0.2em;
+    background-color: var(--theme-pink);
+    color: var(--theme-dark-purple);
+    width: 40%;
+    height: 2.25em;
+    font-weight: 700;
+    text-align: center;
+}
+
+.sendEmail-modal{
+    width: 500px;
+    height: 600px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    margin-top:40%;
+    margin-bottom:30%;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .prize-image {
+        width: 100%;
+        border-radius: 0.5em;
+        border: var(--theme-light-grey) solid 0.1em;
+        box-shadow: var(--shadow);
+    }
+
+}

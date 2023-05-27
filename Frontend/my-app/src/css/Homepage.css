@@ -1,0 +1,217 @@
+
+.call-to-action {
+    background-image: url('../img/LandingPage.svg') ;
+    background-size: cover;
+    background-clip: border-box;
+    background-color: var(--theme-purple);
+    color: #fbfafc;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    z-index:1;
+    height: 700px;
+    margin-top:-20ex;
+}
+
+
+
+.description {
+    /* padding-left: 5em; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 30em;
+    transform: translate(49em, -1em);
+    color: var(--theme-dark-purple)
+}
+
+.description > h2 {
+    font-size: 2.5em;
+    color: var(--theme-dark-purple)
+}
+.description > h3 {
+    font-weight: 100;
+    font-size: 1.3em;
+    transform: translateY(-2em);
+}
+
+.cta-button {
+    transform: translateX(3em);
+}
+
+.explore-button {
+    all: unset;
+    border: var(--theme-extra-light) solid 0.25em;
+    border-radius: 0.7em;
+    background-color: var(--theme-extra-light);
+    color: var(--theme-dark-purple);
+    margin-left: 1.3em;
+    width: 8.75em;
+    height: 2.25em;
+    font-size: 1.2em;
+    font-weight: 700;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.explore-button:hover {
+    background-color: var(--theme-dark-purple);
+    color: var(--theme-extra-light);
+  }
+
+.make-survey-button {
+    all: unset;
+    border: var(--theme-extra-light) solid 0.25em;
+    border-radius: 0.7em;
+    background-color: var(--theme-extra-light);
+    color: var(--theme-dark-purple);
+    margin-left: 1.3em;
+    width: 9.75em;
+    height: 2.25em;
+    font-size: 1.2em;
+    font-weight: 700;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.make-survey-button:hover {
+    background-color: var(--theme-dark-purple);
+    color: var(--theme-extra-light);
+  }
+
+.latest-q {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: #000000 solid 1px; */
+    height: 100%;
+    margin-top: 5%;
+}
+
+.latest-q-container {
+    width: 90%;
+    height: auto;
+}
+
+.latest-q-container > h2{
+    text-align: center;
+    font-size: 3em;
+    font-weight: 900;
+    color: var(--theme-dark-purple);
+}
+
+.latest-q-container > h3 {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 900;
+    transform: translateY(-1em);
+    color: var(--theme-dark-purple);
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.page-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;  
+}
+
+.page {
+    width: 3em;
+    height: 3em;
+}
+
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.ant-message {
+    position: absolute;
+    bottom: 20px;
+    top: unset;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .call-to-action {
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .description {
+        height: 50vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        transform: translateY(10vh);
+    }
+    
+    .caption {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .caption > h3 {
+        font-size: 0.9em;
+    }
+
+    .cta-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform: none;
+    }
+
+    .showcase {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .explore-button {
+        margin-left: 0em;
+        margin-bottom: 1em;
+    }
+
+    .make-survey-button {
+        margin-left: 0em;
+    }
+
+    .latest-q-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80vw;
+    }
+
+    .card-container {
+        flex-direction: column;
+        width: 80%;
+    }
+}

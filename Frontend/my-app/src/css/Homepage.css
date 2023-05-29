@@ -14,6 +14,50 @@
 }
 
 
+#navbar-container {
+    position: relative; /* 設定為相對定位，用於定位 navbar */
+    display: flex; /* 使用 flexbox 佈局 */
+    align-items: center; /* 垂直居中對齊 */
+  }
+  
+  #custom-navbar {
+    width: 20em;
+    height: 3em;
+    display: none; /* 預設隱藏 navbar */
+    position: absolute; /* 設定為絕對定位 */
+    top: 1em; /* navbar 相對於 navbar-container 的頂部位置 */
+    left: 5em; /* navbar 相對於 navbar-container 的左側位置 */
+    background-color: #fff; /* 背景顏色，可根據需要自行調整 */
+    padding: 10px; /* 適當的內距，可根據需要自行調整 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 可視需要的陰影效果 */
+    z-index: 20;
+  }
+  
+  #custom-toggle {
+    position: absolute; /* 設定為絕對定位 */
+    bottom: 0.5; /* 按鈕相對於 navbar-container 的頂部位置 */
+    left: 5em; /* 按鈕相對於 navbar-container 的左側位置 */
+    z-index: 1; /* 設定較高的 z-index，使按鈕處於最上層 */
+    background-color: var(--theme-extra-light);
+    width: 10em;
+    height: 3em;
+    border: none;
+  }
+  
+  #custom-toggle i {
+    font-size: 2em; /* 調整圖示的大小，可根據需要自行調整 */
+    color: var(--theme-purple);
+  }
+
+  #custom-toggle:hover + #custom-navbar,
+  #custom-navbar:hover {
+    display: block; /* 按鈕或 navbar 被 hover 時都顯示 navbar */
+  }
+  
+  #custom-title {
+    margin-left: 100px; /* 適當的左側邊距，避免被按鈕擠壓 */
+  }
+  
 
 .description {
     /* padding-left: 5em; */

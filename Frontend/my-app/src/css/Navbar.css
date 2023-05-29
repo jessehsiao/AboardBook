@@ -25,7 +25,8 @@ button:hover{
 
 .app-title {
     flex-grow: 1;
-    margin-left: 2em;
+    margin:     5 auto;
+    text-align: center;
 }
 
 .app-title > a {

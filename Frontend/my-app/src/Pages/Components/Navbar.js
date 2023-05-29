@@ -50,35 +50,40 @@ const Navbar = () => {
         return(
             <>
                 <header className="header">
-                    <h1 className="app-title"><a href='/'>AboardBook</a></h1>
-                    <nav className="navbar">
-                        <div className='toggle-button' onClick={() => setNavActive(prev => !prev)}>
-                            <span className='bar'></span>
-                            <span className='bar'></span>
-                            <span className='bar'></span>
-                        </div>
-                        <div className='navbar-links'>
-                            <NavLink className={(navData) => navData.isActive ? 'active-nav-option' : 'nav-option'} to='/explore'> {t("貼文")} </NavLink>
-                    
-                            <NavLink className={(navData) => navData.isActive ? 'active-nav-option' : 'nav-option'} to='/Instruction' > {t("說明")} </NavLink>
-                            <div className="nav-option user-dropdown" onClick={() => setModalOpen(true)}>
-                                {t("會員")}
-                                <div className="user-dropdown-options" >
-                                    <button>{t("管理問卷")}</button>
-                                    <button>{t("個人資料")}</button>
-                                    <button>{t("登入")}</button>
+                    <div id="navbar-container">
+                        <button id="custom-toggle"><i class="fas fa-bars"></i></button>
+                        <nav id="custom-navbar">
+                            <div className='toggle-button' onClick={() => setNavActive(prev => !prev)}>
+                                <span className='bar'></span>
+                                <span className='bar'></span>
+                                <span className='bar'></span>
+                            </div>
+                            <div className='navbar-links'>
+                                <NavLink className={(navData) => navData.isActive ? 'active-nav-option' : 'nav-option'} to='/explore'> {t("貼文")} </NavLink>
+                        
+                                <NavLink className={(navData) => navData.isActive ? 'active-nav-option' : 'nav-option'} to='/Instruction' > {t("說明")} </NavLink>
+                                <div className="nav-option user-dropdown" onClick={() => setModalOpen(true)}>
+                                    {t("會員")}
+                                    <div className="user-dropdown-options" >
+                                        <button>{t("管理問卷")}</button>
+                                        <button>{t("個人資料")}</button>
+                                        <button>{t("登入")}</button>
+                                    </div>
+                                </div>
+                                <div className="nav-option user-dropdown" onClick={() => setlngModalOpen(true)}>
+                                    {t("語言")}
+                                    <div className="user-dropdown-options" >
+                                        <button onClick={() => changeLanguage("tw")}>{t("中文")}</button>
+                                        <button onClick={() => changeLanguage("en")}>{t("英文")}</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="nav-option user-dropdown" onClick={() => setlngModalOpen(true)}>
-                                {t("語言")}
-                                <div className="user-dropdown-options" >
-                                    <button onClick={() => changeLanguage("tw")}>{t("中文")}</button>
-                                    <button onClick={() => changeLanguage("en")}>{t("英文")}</button>
-                                </div>
-                            </div>
-                        </div>
-                        {modalOpen && <LoginModal closeModal={setModalOpen} />}
-                    </nav>
+                            {modalOpen && <LoginModal closeModal={setModalOpen} />}
+                        </nav>
+                    </div>
+
+                <h1 className="app-title"><a href='/'>AboardBook</a></h1>
+
                 </header>
 
                 {/* Mobile  Navbar */}

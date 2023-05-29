@@ -1,4 +1,5 @@
 import '../css/Homepage.css';
+import axios from 'axios';
 import { Card } from './Components/Card';
 import { Navbar } from './Components/Navbar';
 import { Footer } from './Components/Footer';
@@ -26,37 +27,44 @@ const Homepage = () => {
     useEffect(() => {
 
         const fetchData = async () => {
-            let data = await fetch('https://be-sdmg4.herokuapp.com/home',{
-                headers: {'Content-Type': 'application/json'}
-            });
-            if (data.status===401){
-                callrefresh('reload');
-            }
-            let dataJSON = await data.json();
-            console.log(dataJSON);
+            try {
+                const response = await axios.get('/healthcheck');
+                const data = response.data;
+                console.log(data);
+              } catch (error) {
+                console.error(error);
+              }
+            // let data = await fetch('https://be-sdmg4.herokuapp.com/home',{
+            //     headers: {'Content-Type': 'application/json'}
+            // });
+            // if (data.status===401){
+            //     callrefresh('reload');
+            // }
+            // let dataJSON = await data.json();
+            // console.log(dataJSON);
             
-            setMaxPage(Math.ceil((dataJSON.length) / 8));
-            setPage(1);
-            setForms( prevForms => {
-                return {
-                    ...prevForms,
-                    '熱門': dataJSON
-                };
-            });
+            // setMaxPage(Math.ceil((dataJSON.length) / 8));
+            // setPage(1);
+            // setForms( prevForms => {
+            //     return {
+            //         ...prevForms,
+            //         '熱門': dataJSON
+            //     };
+            // });
 
-            data = await fetch('https://be-sdmg4.herokuapp.com/home?sortBy=newest',{
-                headers: {'Content-Type': 'application/json'}
-            });
-            if (data.status===401){
-                callrefresh('reload');
-            }
-            dataJSON = await data.json();
-            setForms( prevForms => {
-                return {
-                    ...prevForms,
-                    '最新': dataJSON
-                };
-            });
+            // data = await fetch('https://be-sdmg4.herokuapp.com/home?sortBy=newest',{
+            //     headers: {'Content-Type': 'application/json'}
+            // });
+            // if (data.status===401){
+            //     callrefresh('reload');
+            // }
+            // dataJSON = await data.json();
+            // setForms( prevForms => {
+            //     return {
+            //         ...prevForms,
+            //         '最新': dataJSON
+            //     };
+            // });
         }
         fetchData();
     }, []);

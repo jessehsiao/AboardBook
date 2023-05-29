@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  server:
+    build:  ./Backend/my-app
+    ports: 
+      - "5000:5000"
+    volumes: 
+      - ./Backend/my-app:/app
+    environment: 
+      FLASK_ENV: development
+  
+  web:
+    build: ./Frontend/my-app
+    ports: 
+      - "3000:3000"
+    volumes: 
+      - ./Frontend/my-app:/user/src/app
+    depends_on: 
+      - server

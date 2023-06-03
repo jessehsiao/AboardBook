@@ -10,6 +10,7 @@ ENV FLASK_DEBUG=1
 
 COPY . /app/
 
+
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 

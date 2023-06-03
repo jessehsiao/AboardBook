@@ -28,7 +28,7 @@ const Homepage = () => {
 
         const fetchData = async () => {
       
-            let data = await fetch('http://localhost:5000',{
+            let data = await fetch('/GetCategoryPost?category=美國',{
                 
                 headers: {'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'}
@@ -48,7 +48,7 @@ const Homepage = () => {
             //     };
             // });
 
-            // data = await fetch('https://be-sdmg4.herokuapp.com/home?sortBy=newest',{
+            // data = await fetch('/GetCategoryPost',{
             //     headers: {'Content-Type': 'application/json'}
             // });
             // if (data.status===401){

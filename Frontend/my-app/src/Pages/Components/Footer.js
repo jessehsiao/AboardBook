@@ -9,10 +9,9 @@ const Footer = () => {
         <footer className="footer">
             <div className='copyright'>© 2023 AboardBook</div>
             <div className='footer-link'>
-                <a href='instruction'>{t("會員須知")}</a>
-                <a href='#'>{t("幫助")}</a>
-                <a href='register'>{t("註冊")}</a>
-                <a href='#'>{t("了解更多")}</a>
+                <a href='register'>{t("這是")}</a>
+                <a href='#'>{t("分散式期末")}</a>
+                <a href='#'>{t("哈哈哈")}</a>
             </div>
             <div></div>
         </footer>

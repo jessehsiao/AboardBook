@@ -23,6 +23,7 @@
     height: 520px;
     border-radius: 12px;
     background-color: white;
+    background-image: url('../img/LandingPage.svg') ;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: flex;
     flex-direction: column;

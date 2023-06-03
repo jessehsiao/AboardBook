@@ -3,7 +3,7 @@ services:
   server:
     build:  ./Backend/my-app
     ports: 
-      - "5000:5000"
+      - "5001:5000"
     volumes: 
       - ./Backend/my-app:/app
     environment: 
@@ -15,5 +15,6 @@ services:
       - "3000:3000"
     volumes: 
       - ./Frontend/my-app:/user/src/app
+      - /user/src/app/node_modules
     depends_on: 
       - server

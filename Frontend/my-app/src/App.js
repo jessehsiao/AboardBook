@@ -10,6 +10,7 @@ import { Explore } from './Pages/Explore';
 import { ForgetPassword } from './Pages/ForgetPassword';
 import { EditProfile } from './Pages/EditProfile';
 import { Form } from './Pages/Form'
+import { MakePost } from './Pages/MakePost'
 //import { SendEmail } from './Pages/SendEmail';
 import  { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -26,8 +27,10 @@ const App = () => {
         <Route path='/instruction' element={<Instruction/>}/>
         <Route path='/SurveyManagement' element={<SurveyManagement/>}/>
         <Route path='/register' element={<Register/>}/>
-        <Route path='/MakeSurvey' element={<MakeSurvey/>}/>
-        <Route path='/MakeSurvey2' element={<MakeSurvey2/>}/>
+        <Route path='/MakePost' element={<MakePost/>}/>
+        {/*<Route path='/MakeSurvey' element={<MakeSurvey/>}/>*/}
+        {/*<Route path='/MakeSurvey2' element={<MakeSurvey2/>}/>*/}
+        
         <Route path='/Profile' element={<Profile/>}/>
         <Route path='/explore' element={<Explore/>}/>
         <Route path='/ForgetPassword' element={<ForgetPassword/>}/>

@@ -73,7 +73,7 @@ const Register = () => {
         // }
 
         e.preventDefault();
-        const result = await fetch("http://localhost:5000/Register", {
+        const result = await fetch("/Register", {
             method: "POST",
             body: JSON.stringify({
                 email: email,

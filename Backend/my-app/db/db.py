@@ -7,6 +7,12 @@ username = 'admin'
 password = 'admin123'
 database = 'AdboardBook_DB'
 
+def get_db():
+    # Construct connection string
+    conn = pymysql.connect(host=host, port=port, user=username, password=password, database=database)
+    print("Connection established")
+    return conn
+
 try:
     # build db connection
     connection = pymysql.connect(host=host, port=port, user=username, password=password, database=database)
@@ -14,14 +20,14 @@ try:
     cursor = connection.cursor()
     
     # run sql query
-    cursor.execute("SELECT * FROM User")
+    cursor.execute("SELECT * FROM Users")
     
     # get all data
     rows = cursor.fetchall()
     
     # output data
-    for row in rows:
-        print(row)
+    # for row in rows:
+    #     print(row)
     
     # close connection
     cursor.close()

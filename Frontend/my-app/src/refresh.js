@@ -1,5 +1,5 @@
 const callrefresh = async (type) => {
-    const data = await fetch('https://be-sdmg4.herokuapp.com/refresh',{
+    const data = await fetch('http://127.0.0.1:5000',{
         method: 'POST',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('refresh_token')}`,

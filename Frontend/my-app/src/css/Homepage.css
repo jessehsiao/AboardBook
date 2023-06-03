@@ -33,6 +33,17 @@
     z-index: 20;
   }
   
+  #custom-navbar2 {
+    width: 20em;
+    height: 3em;
+    position: absolute; /* 設定為絕對定位 */
+    top: 1em; /* navbar 相對於 navbar-container 的頂部位置 */
+    right: 5em; /* navbar 相對於 navbar-container 的左側位置 */
+    background-color: var(--theme-extra-light); /* 背景顏色，可根據需要自行調整 */
+    padding: 20px; /* 適當的內距，可根據需要自行調整 */
+    z-index: 20;
+  }
+
   #custom-toggle {
     position: absolute; /* 設定為絕對定位 */
     bottom: 0.5; /* 按鈕相對於 navbar-container 的頂部位置 */

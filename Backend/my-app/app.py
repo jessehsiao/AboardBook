@@ -47,7 +47,7 @@ def refresh():
 
 @app.route("/")
 def hello_world():
-    return "<p>Hello, World!</p>"
+    return jsonify({"health_status": "Good"})
 
 @app.route("/healthcheck")
 def health_check():

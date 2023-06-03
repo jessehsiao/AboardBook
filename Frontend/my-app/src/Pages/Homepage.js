@@ -27,21 +27,17 @@ const Homepage = () => {
     useEffect(() => {
 
         const fetchData = async () => {
-            try {
-                const response = await axios.get('/healthcheck');
-                const data = response.data;
-                console.log(data);
-              } catch (error) {
-                console.error(error);
-              }
-            // let data = await fetch('https://be-sdmg4.herokuapp.com/home',{
-            //     headers: {'Content-Type': 'application/json'}
-            // });
-            // if (data.status===401){
-            //     callrefresh('reload');
-            // }
-            // let dataJSON = await data.json();
-            // console.log(dataJSON);
+      
+            let data = await fetch('http://localhost:5000',{
+                
+                headers: {'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'}
+            });
+            if (data.status===401){
+                callrefresh('reload');
+            }
+            let dataJSON = await data.json();
+            console.log(dataJSON);
             
             // setMaxPage(Math.ceil((dataJSON.length) / 8));
             // setPage(1);
@@ -91,6 +87,7 @@ const Homepage = () => {
 
     return (
         <>
+            <div id="portal"></div>
             <Navbar />
             {modalOpen && <LoginModal closeModal={setModalOpen} />}
             <section className='call-to-action'>

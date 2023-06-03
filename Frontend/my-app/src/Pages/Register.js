@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 const Register = () => {
     const [email, setEmail] = useState("");
-    const [first_name, setFirstname] = useState("");
+    const [username, setFirstname] = useState("");
     const [last_name, setLastname] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
@@ -73,16 +73,16 @@ const Register = () => {
         // }
 
         e.preventDefault();
-        const result = await fetch("https://be-sdmg4.herokuapp.com/Register", {
+        const result = await fetch("http://localhost:5000/Register", {
             method: "POST",
             body: JSON.stringify({
                 email: email,
-                first_name: first_name,
-                last_name: last_name,
+                username: username,
+                // last_name: last_name,
                 password: password,
                 password2: password2,
-                code: code,
-                session_code: sessionStorage.getItem('code')
+                // code: code,
+                // session_code: sessionStorage.getItem('code')
                 // user_pic_url: process.env.PUBLIC_URL + 'default.png'
             }),
         });
@@ -126,19 +126,19 @@ const Register = () => {
       let errors = {};
      
     
-    if (!/\S+@\S+\.edu+\.tw+/.test(email)) {
-        errors.email = '請使用大專院校信箱註冊！';
-    }
-    else{
-        errors.pass = '可使用的電子郵件！';
-    }
+    // if (!/\S+@\S+\.edu+\.tw+/.test(email)) {
+    //     errors.email = '請使用大專院校信箱註冊！';
+    // }
+    // else{
+    //     errors.pass = '可使用的電子郵件！';
+    // }
 
-    if (password.length < 8) {
-        errors.errorpwd = '密碼長度至少8碼以上！';
-    }
-    else{
-        errors.correctpwd = '可使用的密碼！';
-    }
+    // if (password.length < 8) {
+    //     errors.errorpwd = '密碼長度至少8碼以上！';
+    // }
+    // else{
+    //     errors.correctpwd = '可使用的密碼！';
+    // }
 
     const callErrorEmailAlert = () => {
         alert('請輸入正確格式的電子郵件！')
@@ -184,13 +184,13 @@ const Register = () => {
                         {errors.pass && <text>{errors.pass}</text>}
                     </div>
                 </div>
-                <div className="input_content">
+                {/* <div className="input_content">
                     <h3>{t("姓氏")}</h3>
                     <input type="text" maxLength="45" value={last_name} placeholder="Lastname" onChange={(e) => setLastname(e.target.value)} className="reg_inputbar"/>
-                </div>
+                </div> */}
                 <div className="input_content">
-                    <h3>{t("名字")}</h3>
-                    <input type="text" maxLength="45" value={first_name} placeholder="Firstname" onChange={(e) => setFirstname(e.target.value)} className="reg_inputbar"/>
+                    <h3>{t("使用者名稱")}</h3>
+                    <input type="text" maxLength="45" value={username} placeholder="Username" onChange={(e) => setFirstname(e.target.value)} className="reg_inputbar"/>
                 </div>
                 <div className="input_content">
                     <h3>{t("密碼")}</h3>
@@ -226,7 +226,7 @@ const Register = () => {
                             <img src={image.display} style={{  height: '200px', width: '200px'}}/>
                         </div>
                 </div> */}
-
+{/* 
                 <div className="input_content">
                     <h3>{t("信箱驗證碼")}</h3>
                     
@@ -235,19 +235,19 @@ const Register = () => {
                         {errors.email && <button className="Btn ver_submit" onClick={callErrorEmailAlert}>{t("取得驗證碼")}</button>}
                         {errors.pass && <button className="Btn ver_submit" onClick={callemailApi}>{t("取得驗證碼")}</button>}
                         {/* <button className="ver_submit">取得驗證碼</button> */}
-                    </form>
-                </div>
-                <br/>
-                <br/>
-                <div className="member_rule">
+                    {/* </form>
+                </div> */} 
+             
+                {/* <div className="member_rule">
                     <input type="checkbox" className='box' id='agree' value={agree} onChange={callCheckedbox}/>
                     <font>{t("我已詳閱")}
                         <button className='member_info' onClick={() => {window.location.href='instruction'}}>{t("會員須知")}</button>{t("並同意所有會員規範")}</font>
-                </div>
+                </div> */}
             
             <form>
-                {(errors.email || errors.errorpwd || agree!==true) && <button className="reg_submit_gray" onClick={callAlert} >{t("註冊")}</button>}
-                {(errors.pass && errors.correctpwd && agree===true) && <button className="Btn reg_submit" onClick={callregisterApi}>{t("註冊")}</button>}
+                <button className="Btn reg_submit" onClick={callregisterApi}>{t("註冊")}</button>
+                {/* {(errors.email || errors.errorpwd || agree!==true) && <button className="reg_submit_gray" onClick={callAlert} >{t("註冊")}</button>} */}
+                {/* {(errors.pass && errors.correctpwd && agree===true) && <button className="Btn reg_submit" onClick={callregisterApi}>{t("註冊")}</button>} */}
                 {/* <button className="reg_submit">註冊</button> */}
             </form>
             

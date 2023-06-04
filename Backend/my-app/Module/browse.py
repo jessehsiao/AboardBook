@@ -77,6 +77,14 @@ def retrieveInfo():
     finally:
         db.close()
 
+# homepage form
+@browse_bp.route('/home', methods=['GET'])
+def getPostRecommendation():
+    result = retrieveInfo()
+    result.sort(key=lambda x: x['timestamp'], reverse = True)
+    return jsonify(result)
+
+
 def fuzzySearch(keyword, formInfo):
     for form in formInfo:
         # 比對項目：文章標題、類別、文章內容、文章作者

@@ -5,4 +5,5 @@ jsonpickle==2.2.0
 PyJWT==2.4.0
 pymongo==4.1.1
 PyMySQL==1.0.2
+PyTest
 

@@ -18,11 +18,11 @@ function LoginModal( {closeModal}){
     const callLoginApi = async (e) => {
         setload(true)
         e.preventDefault();
-        const result = await fetch("https://be-sdmg4.herokuapp.com/Login", {
+        const result = await fetch("/Login", {
             method: "POST",
             body: JSON.stringify({
                 email: email,
-                password: password,
+                password: password
             }),
         });
         let resJson = await result.json();
@@ -53,9 +53,9 @@ function LoginModal( {closeModal}){
         //   errors.name = 'Enter a valid name';
         // }
     
-        if (!/\S+@\S+\.edu+\.tw+/.test(email)) {
-        errors.email = '請使用大專院校信箱！';
-        } 
+        // if (!/\S+@\S+\.edu+\.tw+/.test(email)) {
+        // errors.email = '請使用大專院校信箱！';
+        // } 
         // else if (!/\S+@\S+\.\S+/.test(email)) {
         //     errors.email = '信箱格式錯誤';
         // }

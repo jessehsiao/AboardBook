@@ -27,21 +27,17 @@ const Homepage = () => {
     useEffect(() => {
 
         const fetchData = async () => {
-            try {
-                const response = await axios.get('/healthcheck');
-                const data = response.data;
-                console.log(data);
-              } catch (error) {
-                console.error(error);
-              }
-            // let data = await fetch('https://be-sdmg4.herokuapp.com/home',{
-            //     headers: {'Content-Type': 'application/json'}
-            // });
-            // if (data.status===401){
-            //     callrefresh('reload');
-            // }
-            // let dataJSON = await data.json();
-            // console.log(dataJSON);
+      
+            let data = await fetch('/GetCategoryPost?category=美國',{
+                
+                headers: {'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'}
+            });
+            if (data.status===401){
+                callrefresh('reload');
+            }
+            let dataJSON = await data.json();
+            console.log(dataJSON);
             
             // setMaxPage(Math.ceil((dataJSON.length) / 8));
             // setPage(1);
@@ -52,7 +48,7 @@ const Homepage = () => {
             //     };
             // });
 
-            // data = await fetch('https://be-sdmg4.herokuapp.com/home?sortBy=newest',{
+            // data = await fetch('/GetCategoryPost',{
             //     headers: {'Content-Type': 'application/json'}
             // });
             // if (data.status===401){
@@ -65,6 +61,7 @@ const Homepage = () => {
             //         '最新': dataJSON
             //     };
             // });
+            //
         }
         fetchData();
     }, []);
@@ -91,6 +88,7 @@ const Homepage = () => {
 
     return (
         <>
+            <div id="portal"></div>
             <Navbar />
             {modalOpen && <LoginModal closeModal={setModalOpen} />}
             <section className='call-to-action'>

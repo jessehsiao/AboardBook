@@ -3,7 +3,7 @@ import pymysql
 import pymongo
 import json
 from db.db import get_db
-from app import app as flask_app
+# from app import app as flask_app
 from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import jwt_required, get_jwt_identity
 import datetime

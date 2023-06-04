@@ -57,7 +57,7 @@ const Form = () => {
                 ]);
                 // await fetchIsOwner()
                 setIsLoading(false);
-                fetchLotteryResults();
+                // fetchLotteryResults();
             }
             catch(error){
                 console.log('Form Page Fetch Error', error)
@@ -81,85 +81,85 @@ const Form = () => {
         });
       };
 
-    const fetchFormStatus = async () =>
-    {
-        const response = await fetch(
-            `/GetPostById?post_id=${encodeURIComponent(POST_ID)}`,
-            {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${localStorage.getItem('jwt')}`  
-                }
-            }
-        );
-        if(response.status === 401){
-            callrefresh();
-        }
-        else{
-            const resJson = await response.json();
-            console.log("Form Status?", resJson);
-            setFormStatus(resJson.status)
-            if(resJson.status === 'Open' && tags.length+2 <= 3){
-                setTags((prevState) => ([...prevState, '填寫問卷','抽獎結果']))
-                setShowTag('填寫問卷')
-            }
-            else if (resJson.status !== 'Open' && tags.length+1 <= 3){
-                setTags((prevState) => ([...prevState, '抽獎結果']))
-                setShowTag('抽獎結果')
-            }
-        }
-    }
+    // const fetchFormStatus = async () =>
+    // {
+    //     const response = await fetch(
+    //         `/GetPostById?post_id=${encodeURIComponent(POST_ID)}`,
+    //         {
+    //             method: "GET",
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 Authorization: `Bearer ${localStorage.getItem('jwt')}`  
+    //             }
+    //         }
+    //     );
+    //     if(response.status === 401){
+    //         callrefresh();
+    //     }
+    //     else{
+    //         const resJson = await response.json();
+    //         console.log("Form Status?", resJson);
+    //         setFormStatus(resJson.status)
+    //         if(resJson.status === 'Open' && tags.length+2 <= 3){
+    //             setTags((prevState) => ([...prevState, '填寫問卷','抽獎結果']))
+    //             setShowTag('填寫問卷')
+    //         }
+    //         else if (resJson.status !== 'Open' && tags.length+1 <= 3){
+    //             setTags((prevState) => ([...prevState, '抽獎結果']))
+    //             setShowTag('抽獎結果')
+    //         }
+    //     }
+    // }
 
 
-    const fetchIsOwner = async () =>
-    {
-        const response = await fetch(
-            `https://be-sdmg4.herokuapp.com/FormOwnerCheck?form_id=${encodeURIComponent(POST_ID)}`,
-            {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${localStorage.getItem('jwt')}`  
-                }
-            }
-        );
-        if(response.status === 401){
-            callrefresh();
-        }
-        else{
-            const resJson = await response.json();
-            console.log("Is owner?", resJson);
-            setIsOwner(resJson.form_owner_status)
+    // const fetchIsOwner = async () =>
+    // {
+    //     const response = await fetch(
+    //         `https://be-sdmg4.herokuapp.com/FormOwnerCheck?form_id=${encodeURIComponent(POST_ID)}`,
+    //         {
+    //             method: "GET",
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 Authorization: `Bearer ${localStorage.getItem('jwt')}`  
+    //             }
+    //         }
+    //     );
+    //     if(response.status === 401){
+    //         callrefresh();
+    //     }
+    //     else{
+    //         const resJson = await response.json();
+    //         console.log("Is owner?", resJson);
+    //         setIsOwner(resJson.form_owner_status)
 
-            if(resJson.form_owner_status === true && tags.length+1 <= 3){
-                setTags((prevState) => ([...prevState, '填答結果']))
-            }
-        }
-    };
+    //         if(resJson.form_owner_status === true && tags.length+1 <= 3){
+    //             setTags((prevState) => ([...prevState, '填答結果']))
+    //         }
+    //     }
+    // };
     
-    const fetchCurrentGifts = async () => {
-        const response = await fetch(
-            `https://be-sdmg4.herokuapp.com/GetGift?form_id=${encodeURIComponent(POST_ID)}`,
-            {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    // Authorization: `Bearer ${localStorage.getItem('jwt')}`  // 驗證使用者資訊 應該要拿掉
-                }
-        });
-        if(response.status === 401){
-            callrefresh();
-        }
-        else{
-            const responseJson = await response.json();
-            setGifts(responseJson.data);
-            console.log('Giftsdata',responseJson.data);
-            if(responseJson.data.length===0){
-                setHaveGifts(false);
-            }
-        }
-    };
+    // const fetchCurrentGifts = async () => {
+    //     const response = await fetch(
+    //         `https://be-sdmg4.herokuapp.com/GetGift?form_id=${encodeURIComponent(POST_ID)}`,
+    //         {
+    //             method: "GET",
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 // Authorization: `Bearer ${localStorage.getItem('jwt')}`  // 驗證使用者資訊 應該要拿掉
+    //             }
+    //     });
+    //     if(response.status === 401){
+    //         callrefresh();
+    //     }
+    //     else{
+    //         const responseJson = await response.json();
+    //         setGifts(responseJson.data);
+    //         console.log('Giftsdata',responseJson.data);
+    //         if(responseJson.data.length===0){
+    //             setHaveGifts(false);
+    //         }
+    //     }
+    // };
 
     const fetchFormDetail = async () => {
         try {
@@ -178,32 +178,31 @@ const Form = () => {
             }
             else{
                 const resJson = await response.json();
-                console.log('Form Detail',resJson);
+
+
+
+                const date = new Date(resJson[0].posted[0].timestamp);
+                const options = {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    weekday: 'long',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: true,
+                    timeZone: 'UTC',
+                };
+                const formatter = new Intl.DateTimeFormat('zh-TW', options);
+
+                console.log("Comments : ",resJson[0].comments)
+
                 setFormDetail({
-                    form_title : resJson.form_title,
-                    form_owner_id : resJson.user_student_id,
-                    form_owner_pic_url : resJson.user_pic_url,
-                    form_create_date : new Intl.DateTimeFormat('zh-TW', {
-                        year: 'numeric', 
-                        month: 'long',
-                        day: 'numeric',
-                        hour: 'numeric',
-                        minute: 'numeric',
-                    }).format(new Date(resJson.form_create_date)),
-                    form_end_date : new Intl.DateTimeFormat('zh-TW', {
-                        year: 'numeric', 
-                        month: 'long',
-                        day: 'numeric',
-                        hour: 'numeric',
-                        minute: 'numeric',
-                    }).format(new Date(resJson.form_end_date)),
-                    form_draw_date : new Intl.DateTimeFormat('zh-TW', {
-                        year: 'numeric', 
-                        month: 'long',
-                        day: 'numeric',
-                        hour: 'numeric',
-                        minute: 'numeric',
-                    }).format(new Date(resJson.form_draw_date))
+                    form_title : resJson[0].posted[0].title,
+                    form_user : resJson[0].posted[0].name,
+                    form_content : resJson[0].posted[0].content,
+                    category : resJson[0].posted[0].category_name,
+                    form_create_date : formatter.format(date),
+                    comments: resJson[0].comments
                 })
             }
         } catch (err){
@@ -211,34 +210,67 @@ const Form = () => {
         }
     };
 
-    const fetchLotteryResults = async () =>
-    {
-        const response = await fetch(
-            `https://be-sdmg4.herokuapp.com/GetLotteryResults?form_id=${encodeURIComponent(POST_ID)}`,
-            {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    // Authorization: `Bearer ${localStorage.getItem('jwt')}`,  //驗證使用者資訊
-                }
-            }
-        )
-        if (response.status===401){
-            callrefresh();
-        } else{
-            const resJson = await response.json();
-            console.log('Lottery Results',resJson);     
-            setLotteryResults({
-                "status": resJson['status'],
-                "results": resJson.data['results'],
-                "isLoading": false,
-            })   
-        }
-    };
+    // const fetchLotteryResults = async () =>
+    // {
+    //     const response = await fetch(
+    //         `https://be-sdmg4.herokuapp.com/GetLotteryResults?form_id=${encodeURIComponent(POST_ID)}`,
+    //         {
+    //             method: "GET",
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 // Authorization: `Bearer ${localStorage.getItem('jwt')}`,  //驗證使用者資訊
+    //             }
+    //         }
+    //     )
+    //     if (response.status===401){
+    //         callrefresh();
+    //     } else{
+    //         const resJson = await response.json();
+    //         console.log('Lottery Results',resJson);     
+    //         setLotteryResults({
+    //             "status": resJson['status'],
+    //             "results": resJson.data['results'],
+    //             "isLoading": false,
+    //         })   
+    //     }
+    // };
 
     function changePage(showTag){
+        console.log('Show tag: ', showTag)
         if (showTag === "填寫問卷"){
-            return <Fillin form_id = {POST_ID} form_title={formDetail.form_title} />
+            return(
+
+            <section className='lottery-container'>
+                <section className='form-info2 card-shadow2'>
+                    <h2>{formDetail.form_title}</h2>
+                    {t("地區")}：{formDetail.category} <br />
+                    {t("發布者")}：{formDetail.form_user} <br />
+                    {t("發布時間")}：{formDetail.form_create_date} <br />
+
+                    <div className='content-box'>
+                    {formDetail.form_content} <br />
+                    </div>
+                    
+                </section>        
+
+                <section className='form-info3 card-shadow3'>
+                    <h2>留言</h2>
+                    <div className='content-box'>
+                        {formDetail.comments.map((comment, index) => (
+                        <div key={index} className='comment'>
+                            <p className='comment-content'>{comment['User Name']} : {comment['Comment Content']}</p>
+                            <p className='comment-timestamp'>{comment.Timestamp}</p>
+                        </div>
+                        ))}
+                    </div>
+                </section>
+       
+                    
+            </section>
+
+
+
+            )
         }
         else if (showTag === "抽獎結果"){
             return <Lottery form_id = {POST_ID} lr = {lotteryResults} form_title={formDetail.form_title} isOwner={isOwner}  haveGifts={haveGifts}/> 
@@ -293,27 +325,7 @@ const Form = () => {
                     {/* 問卷左半部 */}
                     {changePage(showTag)}
 
-                    {/* 問卷右半部基本問卷資訊 */}
-                    <section className='form-info card-shadow'>
-                        <h2> {t("問卷資訊")} </h2>
-                        {t("發布時間")}：{formDetail.form_create_date} <br />
-                        {t("截止時間")}：{formDetail.form_end_date} <br />
-                        {haveGifts && <>{t("抽獎時間")}：{formDetail.form_draw_date}</>}
-                        <h2> {t("製作者")} </h2>
-                        <Avator user_name={formDetail.form_owner_id}  user_pic_url={formDetail.form_owner_pic_url}/> 
-                        {/* 缺製作者的圖片 url */}
-                        <h2> {t("獎品")} </h2>
-                        {haveGifts===false ? <h3>{t("此問卷沒有抽獎")}</h3> :  
-                            gifts.map(gift => {
-                                return (
-                                    <div className='prize-container' key={gift.gift_name}>
-                                        <h3> {gift.gift_name} × {gift.amount} </h3>
-                                        <img className='prize-image' src={gift.gift_pic_url} alt=''/>
-                                    </div>
-                                )
-                            })
-                        }
-                    </section>
+             
                 </section>
                 </>
             )

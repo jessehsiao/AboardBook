@@ -177,6 +177,22 @@ def insertComent():
 
     return jsonify(response)
 
+def getUserNameById(user_id):
+    db = get_db()
+    cursor = db.cursor(cursor=pymysql.cursors.DictCursor)
+    query = '''
+        SELECT name
+        FROM Users
+        Where user_id = (%s);
+    '''
+    cursor.execute(query, [user_id])
+    db.commit()
+    db.close()
+
+    fetch_results = cursor.fetchone()
+    results = fetch_results["name"]
+
+    return results
 
 def getPostComment(post_id):    
     try: 
@@ -198,6 +214,7 @@ def getPostComment(post_id):
         for result in results:
             comment = {
                 "User ID": result["User_ID"],
+                "User Name": getUserNameById(result["User_ID"]),
                 "Comment Content": result["Comment_Content"],
                 "Timestamp": result["Timestamp"]
             }

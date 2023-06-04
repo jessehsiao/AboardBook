@@ -7,6 +7,40 @@
     /* background-color: var(--theme-extra-light); */
     margin: 3% 5%;
 }
+.label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: darkgoldenrod;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 50%;
+  }
+  
+
+.comment {
+    background-color: #fff9f4;
+    padding: 1em;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border-color: var(--theme-dark-purple);
+    border-width: 2px;
+    border-style: solid; /* 添加边框样式 */
+  }
+  
+  .comment-content {
+    color: var(--theme-dark-purple);
+    font-weight: bold;
+  }
+  
+  .comment-timestamp {
+    font-style: italic;
+  }
+  
+  .comment-user {
+    color: blue;
+  }
+  
 
 .page-navbar-item{
     height: 3em;

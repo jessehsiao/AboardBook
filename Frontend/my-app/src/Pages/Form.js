@@ -21,7 +21,6 @@ import { useTranslation } from "react-i18next";
 
 const Form = () => {
     const props = useParams();
-    console.log("Form: ", props)
     const POST_ID = props.form_id; // 傳入想要看的 formID
     const [gifts, setGifts] = useState([]);
     const [haveGifts, setHaveGifts] = useState(true);
@@ -38,6 +37,40 @@ const Form = () => {
     });
     const [showLoginModal, setShowLoginModal] = useState(false);
     const { t, i18n } = useTranslation();
+    const [newComment, setNewComment] = useState('');
+    const handleCommentChange = (event) => {
+        setNewComment(event.target.value);
+      };
+    const handleSubmitComment = async (event) => {
+        event.preventDefault();
+        try {
+          const response = await fetch(`/InsertComent`, {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('jwt')}`
+            },
+            body: JSON.stringify({
+                post_id: parseInt(POST_ID),
+                post_comment: newComment,
+                category : ""
+            }),
+          });
+          
+          alert("已送出留言！！")
+      
+          if (response.ok) {
+            // 留言提交成功，更新留言列表
+            window.location.reload();
+
+          } else {
+            console.log("ERROR")
+
+          }
+        } catch (error) {
+          console.log('留言提交出错:', error);
+        }
+      };
+            
     
 
 
@@ -194,7 +227,7 @@ const Form = () => {
                 };
                 const formatter = new Intl.DateTimeFormat('zh-TW', options);
 
-                console.log("Comments : ",resJson[0].comments)
+                // console.log("Comments : ",resJson[0].comments)
 
                 setFormDetail({
                     form_title : resJson[0].posted[0].title,
@@ -236,7 +269,7 @@ const Form = () => {
     // };
 
     function changePage(showTag){
-        console.log('Show tag: ', showTag)
+        // console.log('Show tag: ', showTag)
         if (showTag === "填寫問卷"){
             return(
 
@@ -252,20 +285,35 @@ const Form = () => {
                     </div>
                     
                 </section>        
-
                 <section className='form-info3 card-shadow3'>
                     <h2>留言</h2>
-                    <div className='content-box'>
-                        {formDetail.comments.map((comment, index) => (
-                        <div key={index} className='comment'>
-                            <p className='comment-content'>{comment['User Name']} : {comment['Comment Content']}</p>
+                    <div className='content-box comment-container'>
+                        {formDetail.comments.length > 0 ? (
+                        formDetail.comments.map((comment, index) => (
+                            <div key={index} className='comment'>
+                            <p className='comment-content'>{comment['User Name']} :</p>
+                            <p >{comment['Comment Content']}</p>
                             <p className='comment-timestamp'>{comment.Timestamp}</p>
+                            </div>
+                        ))
+                        ) : (
+                        <p>目前尚未有留言</p>
+                        )}
+
+                        <form onSubmit={handleSubmitComment} className='comment-form'>
+                        <div className='comment-input-container'>
+                            <input
+                            className='input_comments'
+                            type='text'
+                            value={newComment}
+                            onChange={handleCommentChange}
+                            placeholder='輸入留言...'
+                            />
                         </div>
-                        ))}
+                        <button type='submit' className='send_comments'>送出</button>
+                        </form>
                     </div>
-                </section>
-       
-                    
+                </section>            
             </section>
 
 
@@ -338,7 +386,7 @@ const Form = () => {
         <Navbar/>
         { isLoading ? <> <section className='loading-container'> <ReactLoading type="spinningBubbles" color="#432a58" /> <h3> Loading </h3></section> </> :
             <>
-            {console.log('render form page')}
+            {/* {console.log('render form page')} */}
             {/* 選擇要填寫問卷、查看抽獎、查看填寫結果 */}
             <section className='lottery-page-container'>
                 {showLoginModal && <LoginModal closeModal={setShowLoginModal}/>}

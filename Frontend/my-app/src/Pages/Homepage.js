@@ -47,21 +47,6 @@ const Homepage = () => {
                     '熱門': dataJSON
                 };
             });
-
-            // data = await fetch('/GetCategoryPost',{
-            //     headers: {'Content-Type': 'application/json'}
-            // });
-            // if (data.status===401){
-            //     callrefresh('reload');
-            // }
-            // dataJSON = await data.json();
-            // setForms( prevForms => {
-            //     return {
-            //         ...prevForms,
-            //         '最新': dataJSON
-            //     };
-            // });
-            //
         }
         fetchData();
     }, []);
@@ -152,7 +137,7 @@ const Homepage = () => {
             </section>
             <section className='page-div'>
                 <img 
-                    src={`${process.env.PUBLIC_URL}/next_page.png`}
+                    src={`https://i.imgur.com/AqHfxg1.png`}
                     width={50}
                     style={last_page_style} 
                     onClick={() => {
@@ -162,7 +147,7 @@ const Homepage = () => {
                 />
                 Page {page} of {maxPage}
                 <img 
-                    src={`${process.env.PUBLIC_URL}/next_page.png`}
+                    src={`https://i.imgur.com/AqHfxg1.png`}
                     width={50}
                     style={next_page_style}
                     onClick={() =>{ 

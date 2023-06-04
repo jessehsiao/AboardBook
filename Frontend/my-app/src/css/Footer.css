@@ -1,6 +1,7 @@
 /* Footer --------------------------*/
 .footer{
-    margin-top: 10%;
+    /* margin-top: auto; */
+    margin-top: 30%;
     display: flex;
     align-items: center;
     justify-content: space-between;

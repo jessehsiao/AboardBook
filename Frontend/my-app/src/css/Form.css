@@ -7,6 +7,17 @@
     /* background-color: var(--theme-extra-light); */
     margin: 3% 5%;
 }
+.form-page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 設置最小高度為視窗高度，以填滿整個頁面 */
+  }
+  
+  .lottery-page-container {
+    flex-grow: 1; /* 讓這個容器自動填充可用空間 */
+  }
+
+    
 .label {
     position: absolute;
     top: 0;
@@ -95,6 +106,17 @@ margin-right: 10px;
     align-items: center;
 }
 
+.form-page-container {
+background-image: url('../img/LandingPage.svg') ;
+background-size: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 設置最小高度為視窗高度，以填滿整個頁面 */
+}
+
+.lottery-page-container {
+  flex-grow: 1; /* 讓這個容器自動填充可用空間 */
+}
 
 .alert-modal{
     width: 300px;

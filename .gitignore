@@ -9,3 +9,4 @@ backend-venv/
 # CDK asset staging directory
 .cdk.staging
 cdk.out
+node_modules

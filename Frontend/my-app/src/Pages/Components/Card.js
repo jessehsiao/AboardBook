@@ -5,14 +5,29 @@ import { useTranslation } from "react-i18next";
 import React, { useState, useEffect } from 'react';
 
 const Card = ({ info, type }) => {
+
+    const imageUrls = [
+        'https://i.imgur.com/amr4AKi.png',
+        'https://i.imgur.com/J4vCNv6.png',
+        'https://i.imgur.com/koz9hYP.png',
+        'https://i.imgur.com/qGVe0pq.png',
+        'https://i.imgur.com/p605DW0.png',
+        'https://i.imgur.com/oF2oN2c.png',
+        'https://i.imgur.com/sHElTiU.png',
+        'https://i.imgur.com/8cIY8aH.png',
+        'https://i.imgur.com/6MtjvCp.png'
+      ];
+
+    const randomIndex = Math.floor(Math.random() * imageUrls.length);
+
     const { t, i18n } = useTranslation();
     if (!info) return <div className="empty-card"></div>;
-    let prize, num_prize, image_path, title, due_time, lottery_time;
+    let author, num_prize, image_path, title, due_time, lottery_time, category_name;
 
-    prize = '抽獎名額 ';
-    num_prize = info.num_gift;
-    image_path = info.form_pic_url || (process.env.PUBLIC_URL + 'form_preview_default.png');
-    title = info.form_title.length > 30 ? info.form_title.substring(0, 30) + '...' : info.form_title;
+    category_name = info.category_name;
+    author = info.name;
+    image_path = info.form_pic_url || imageUrls[randomIndex];
+    title = info.title.length > 30 ? info.title.substring(0, 30) + '...' : info.title;
     // due_time = info.form_end_date;
     due_time = new Intl.DateTimeFormat('zh-TW', {
         year: 'numeric', 
@@ -20,19 +35,34 @@ const Card = ({ info, type }) => {
         day: 'numeric',
         hour: 'numeric',
         minute: 'numeric',
-        }).format(new Date(info.form_end_date))
+        }).format(new Date(info.timestamp))
 
-    if (info.form_draw_date===null){
+    if (info.timestamp===null){
         lottery_time = "此問卷沒有抽獎"
     }
     else{
-        lottery_time = new Intl.DateTimeFormat('zh-TW', {
-            year: 'numeric', 
+
+        const timestamp = info.timestamp;
+        const date = new Date(timestamp);
+        const options = {
+            year: 'numeric',
             month: 'long',
             day: 'numeric',
+            weekday: 'long',
             hour: 'numeric',
             minute: 'numeric',
-        }).format(new Date(info.form_draw_date));
+            hour12: true,
+            timeZone: 'UTC',
+        };
+        const formatter = new Intl.DateTimeFormat('zh-TW', options);
+        lottery_time = formatter.format(date);
+        // lottery_time = new Intl.DateTimeFormat('zh-TW', {
+        //     year: 'numeric', 
+        //     month: 'long',
+        //     day: 'numeric',
+        //     hour: 'numeric',
+        //     minute: 'numeric',
+        // }).format(new Date(info.timestamp));
     }
 
     // if (type === 'explore'){
@@ -50,31 +80,31 @@ const Card = ({ info, type }) => {
         return
     }
 
-    // 刪除或關閉問卷
-    const manageform = async (action) => {
-        const a = JSON.stringify({
-            form_id: info.form_id,
-            action : action,
-        })
+    // // 刪除或關閉問卷
+    // const manageform = async (action) => {
+    //     const a = JSON.stringify({
+    //         form_id: info.form_id,
+    //         action : action,
+    //     })
 
-        const getprotected = await fetch('https://be-sdmg4.herokuapp.com/SurveyManagement',{
+    //     const getprotected = await fetch('https://be-sdmg4.herokuapp.com/SurveyManagement',{
 
-            method: 'PUT',
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('jwt')}`,
-            },
-            body: a,
-        });
-        console.log(getprotected.status);
-        if(getprotected.status === 401){
-            callrefresh();
-        }else{
-            const resdata = await getprotected.json();
-            console.log(resdata);
-            alert(resdata.message);
-            window.location.reload();
-        }
-    };
+    //         method: 'PUT',
+    //         headers: {
+    //             Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    //         },
+    //         body: a,
+    //     });
+    //     console.log(getprotected.status);
+    //     if(getprotected.status === 401){
+    //         callrefresh();
+    //     }else{
+    //         const resdata = await getprotected.json();
+    //         console.log(resdata);
+    //         alert(resdata.message);
+    //         window.location.reload();
+    //     }
+    // };
 
     const showStatus = () => {
         if(type==='replied'){
@@ -124,24 +154,24 @@ const Card = ({ info, type }) => {
     return (
         <div className="card card-shadow" onClick={clickForm}>
             <div className="prize-tag-container">
-                {type==='home'? <><div className="prize-tag">{t(prize)}{` ${num_prize}`} {t(" 名")}</div></> : <></>}
-                {showStatus()}
-                {type==='created' && 
+                {type==='home'? <><div className="prize-tag">{t(category_name)}</div></> : <></>}
+                {/* {showStatus()} */}
+                {/* {type==='created' && 
                     <div className="nav-option card-dropdown" >
                         {t("...")}
                         <div className="user-dropdown-options" >
                             <button onClick={async e =>{e.stopPropagation(); manageform('close')}}>{t("關閉問卷")}</button>
                             <button onClick={async e =>{e.stopPropagation(); manageform('delete')}}>{t("刪除問卷")}</button>
                         </div>
-                    </div>}
+                    </div>} */}
             </div>
             <img alt="" className="q-image" src={image_path}/>
             <div className='card-form-title'> <h3>{title}</h3> </div>
             <p>
-                {t("截止時間")}:<br/>{due_time} <br/>
-                {t("抽獎時間")}:<br/>{t(lottery_time)}
+                {t("發布者")}: {author} <br/>
+                {t("發布時間")}:<br/>{lottery_time} <br/>
             </p>
-            <div 
+            {/* <div 
                 className='share-q'
                 onClick={async e => {
                     e.stopPropagation();
@@ -153,7 +183,7 @@ const Card = ({ info, type }) => {
                 }}
             >
                 <FaRegCopy/>
-            </div>
+            </div> */}
         </div>
 
     )

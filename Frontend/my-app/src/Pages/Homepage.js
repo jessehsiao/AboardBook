@@ -28,7 +28,7 @@ const Homepage = () => {
 
         const fetchData = async () => {
       
-            let data = await fetch('/GetCategoryPost?category=美國',{
+            let data = await fetch('/home',{
                 
                 headers: {'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'}
@@ -39,14 +39,14 @@ const Homepage = () => {
             let dataJSON = await data.json();
             console.log(dataJSON);
             
-            // setMaxPage(Math.ceil((dataJSON.length) / 8));
-            // setPage(1);
-            // setForms( prevForms => {
-            //     return {
-            //         ...prevForms,
-            //         '熱門': dataJSON
-            //     };
-            // });
+            setMaxPage(Math.ceil((dataJSON.length) / 8));
+            setPage(1);
+            setForms( prevForms => {
+                return {
+                    ...prevForms,
+                    '熱門': dataJSON
+                };
+            });
 
             // data = await fetch('/GetCategoryPost',{
             //     headers: {'Content-Type': 'application/json'}

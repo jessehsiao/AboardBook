@@ -17,7 +17,40 @@
     border-radius: 50%;
   }
   
+.input_comments {
+    height: 4em;
+    background-color: #fff9f4;
+    padding: 1em;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border-color: var(--theme-dark-purple);
+    border-width: 2px;
+    border-style: solid; /* 添加边框样式 */
+}
+.comment-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+.comment-form {
+display: flex;
+align-items: flex-start;
+}
 
+.comment-input-container {
+flex-grow: 1;
+margin-right: 10px;
+}
+
+.send_comments {
+    border-radius: 10px;
+    width: 5em;
+    height: 4em;
+    font-weight: bold;
+    color: white;
+    background-color: var(--theme-dark-purple);
+}
+  
 .comment {
     background-color: #fff9f4;
     padding: 1em;

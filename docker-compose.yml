@@ -15,5 +15,6 @@ services:
       - "3000:3000"
     volumes: 
       - ./Frontend/my-app:/user/src/app
+      - /usr/src/app/node_modules
     depends_on: 
       - server

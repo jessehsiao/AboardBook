@@ -9,11 +9,46 @@
 
 /* left-hand side */
 .lottery-container{
+    background-image: url('../img/LandingPage.svg') ;
+    background-size: 90%; 
     display:flex;
     flex-direction: row;
     margin-bottom: 10%;
     width:100%;
 }
+
+.lottery-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 设置容器高度占满整个视口高度 */
+  }
+  
+  .section-wrapper {
+    margin-top: 2em; /* 上方section的顶部外边距 */
+    margin-bottom: 2em; /* 下方section的底部外边距 */
+  }
+  
+  .form-info2 {
+    width: 60%;
+    margin-top: 10%;
+    padding: 0.5em 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .form-info3 {
+    width: 60%;
+    margin: 3em;
+    padding: 0.5em 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
 .lottery-results{
     height: 100%;
@@ -87,6 +122,36 @@
     padding: 0.5em 2em;
     display: flex;
     flex-direction: column;
+}
+.content-box {
+    width: 70%;
+    margin: 4%;
+}
+
+
+
+/* General CSS  (everyone can use) --------*/
+.card-shadow2{
+    border: #856147;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    background-color: #fff5eb;
+    margin-top: 25%;
+    padding-bottom: 3%;
+  }
+
+
+  .card-shadow3{
+    border: var(--theme-light-grey) solid 0.1em;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    background-color: var(--theme-extra-light);
+  }
+
+.card-shadow2 > h2{
+    color:#5c3316;
 }
 
 /* .form-info > h2{

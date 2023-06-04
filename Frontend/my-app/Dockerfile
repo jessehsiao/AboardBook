@@ -8,6 +8,7 @@ COPY ./package.json ./
 COPY ./yarn.lock ./
 
 RUN npm install --silent
+RUN npm install react-scripts@5.0.0 --silent
 
 COPY . .
 

@@ -83,7 +83,7 @@ const SurveyStatistics = (props) => {
     for (let i = 0; i < answerResults.length; i++) {
         var uni_ans_list = []
         var ans_count = []
-        if (answerResults[i].question_type != "簡答題"){
+        if (answerResults[i].question_type !== "簡答題"){
             for (let j = 0; j < answerResults[i].replies.length; j++) {
                 for (let k = 0; k < answerResults[i].replies[j].answer.length; k++){
                     if (uni_ans_list.includes(answerResults[i].replies[j].answer[k])){

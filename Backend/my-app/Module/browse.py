@@ -202,11 +202,11 @@ def getPostComment(post_id):
                 "Timestamp": result["Timestamp"]
             }
             response.append(comment)
-
+        # print("MongoDB = ",comment)
         # 回傳回應
         return response
-    except:
-        print("Fail to get comments of post")
+    except Exception as e:
+        print("Error:", e)
 
 
 def getPostContentByID(post_id):  
@@ -228,7 +228,7 @@ def getPostContentByID(post_id):
 # Get post and comment by post_id (閱讀文章 GET)
 @browse_bp.route('/GetPostById', methods=["GET"])
 def getPostById():
-    post_id = post_cat = request.args.get('post_id')
+    post_id = request.args.get('post_id')
     response = [{'posted': getPostContentByID(post_id),
                 'comments': getPostComment(post_id)}]
     return jsonify(response)

@@ -22,8 +22,9 @@ const Card = ({ info, type }) => {
 
     const { t, i18n } = useTranslation();
     if (!info) return <div className="empty-card"></div>;
-    let author, num_prize, image_path, title, due_time, lottery_time, category_name;
+    let author, post_id, image_path, title, due_time, lottery_time, category_name;
 
+    post_id = info.post_id
     category_name = info.category_name;
     author = info.name;
     image_path = info.form_pic_url || imageUrls[randomIndex];
@@ -75,8 +76,8 @@ const Card = ({ info, type }) => {
     // }
 
     const clickForm = (e) => {
-        console.log("form_id of this card is", info.form_id);
-        window.location.href='form/'+info.form_id;
+        console.log("form_id of this card is", info.post_id);
+        window.location.href='form/'+info.post_id;
         return
     }
 

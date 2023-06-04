@@ -21,7 +21,8 @@ import { useTranslation } from "react-i18next";
 
 const Form = () => {
     const props = useParams();
-    const FORM_ID = props.form_id; // 傳入想要看的 formID
+    console.log("Form: ", props)
+    const POST_ID = props.form_id; // 傳入想要看的 formID
     const [gifts, setGifts] = useState([]);
     const [haveGifts, setHaveGifts] = useState(true);
     const [formDetail, setFormDetail] = useState([]);
@@ -50,11 +51,11 @@ const Form = () => {
         const fetchData = async () => {
             try{
                 await Promise.all([
-                    fetchCurrentGifts(),
+                    // fetchCurrentGifts(),
                     fetchFormDetail(),
-                    fetchFormStatus(),
+                    // fetchFormStatus(),
                 ]);
-                await fetchIsOwner()
+                // await fetchIsOwner()
                 setIsLoading(false);
                 fetchLotteryResults();
             }
@@ -83,7 +84,7 @@ const Form = () => {
     const fetchFormStatus = async () =>
     {
         const response = await fetch(
-            `https://be-sdmg4.herokuapp.com/GetFormStatus?form_id=${encodeURIComponent(FORM_ID)}`,
+            `/GetPostById?post_id=${encodeURIComponent(POST_ID)}`,
             {
                 method: "GET",
                 headers: {
@@ -114,7 +115,7 @@ const Form = () => {
     const fetchIsOwner = async () =>
     {
         const response = await fetch(
-            `https://be-sdmg4.herokuapp.com/FormOwnerCheck?form_id=${encodeURIComponent(FORM_ID)}`,
+            `https://be-sdmg4.herokuapp.com/FormOwnerCheck?form_id=${encodeURIComponent(POST_ID)}`,
             {
                 method: "GET",
                 headers: {
@@ -139,7 +140,7 @@ const Form = () => {
     
     const fetchCurrentGifts = async () => {
         const response = await fetch(
-            `https://be-sdmg4.herokuapp.com/GetGift?form_id=${encodeURIComponent(FORM_ID)}`,
+            `https://be-sdmg4.herokuapp.com/GetGift?form_id=${encodeURIComponent(POST_ID)}`,
             {
                 method: "GET",
                 headers: {
@@ -163,7 +164,7 @@ const Form = () => {
     const fetchFormDetail = async () => {
         try {
             const response = await fetch(
-                `https://be-sdmg4.herokuapp.com/GetFormDetail?form_id=${encodeURIComponent(FORM_ID)}`,
+                `/GetPostById?post_id=${encodeURIComponent(POST_ID)}`,
                 {
                     method: "GET",
                     headers: {
@@ -213,7 +214,7 @@ const Form = () => {
     const fetchLotteryResults = async () =>
     {
         const response = await fetch(
-            `https://be-sdmg4.herokuapp.com/GetLotteryResults?form_id=${encodeURIComponent(FORM_ID)}`,
+            `https://be-sdmg4.herokuapp.com/GetLotteryResults?form_id=${encodeURIComponent(POST_ID)}`,
             {
                 method: "GET",
                 headers: {
@@ -237,16 +238,16 @@ const Form = () => {
 
     function changePage(showTag){
         if (showTag === "填寫問卷"){
-            return <Fillin form_id = {FORM_ID} form_title={formDetail.form_title} />
+            return <Fillin form_id = {POST_ID} form_title={formDetail.form_title} />
         }
         else if (showTag === "抽獎結果"){
-            return <Lottery form_id = {FORM_ID} lr = {lotteryResults} form_title={formDetail.form_title} isOwner={isOwner}  haveGifts={haveGifts}/> 
+            return <Lottery form_id = {POST_ID} lr = {lotteryResults} form_title={formDetail.form_title} isOwner={isOwner}  haveGifts={haveGifts}/> 
         }
         else if (showTag === "填答結果"){
-            return <SurveyStatistics form_id = {FORM_ID} form_title={formDetail.form_title} lotteryResults={lotteryResults}/> 
+            return <SurveyStatistics form_id = {POST_ID} form_title={formDetail.form_title} lotteryResults={lotteryResults}/> 
         }
         else{
-            return <Lottery form_id = {FORM_ID} lr = {lotteryResults} form_title={formDetail.form_title} haveGifts={haveGifts}/> 
+            return <Lottery form_id = {POST_ID} lr = {lotteryResults} form_title={formDetail.form_title} haveGifts={haveGifts}/> 
         }
     };
 

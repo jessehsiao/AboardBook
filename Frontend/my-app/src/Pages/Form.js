@@ -215,7 +215,7 @@ const Form = () => {
                     </form>
                     ) : (
                         <div class="login-button-container">    
-                            <button className='login-button' onClick={makeForm}>想要留言嗎？快來登入吧～</button>
+                            <button className='login-button2' onClick={makeForm}>想要留言嗎？快來登入吧～</button>
                         </div>
                     )}
 

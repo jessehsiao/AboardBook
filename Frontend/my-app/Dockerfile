@@ -1,14 +1,13 @@
 FROM node:14-slim
 
-VOLUME /user/src/app/node_modules
-
 WORKDIR /user/src/app 
+VOLUME /user/src/app/node_modules
 
 COPY ./package.json ./
 
 COPY ./yarn.lock ./
 
-RUN npm install 
+RUN npm install --silent
 
 COPY . .
 

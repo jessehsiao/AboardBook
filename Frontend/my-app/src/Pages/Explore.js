@@ -17,35 +17,33 @@ const Explore = ( ) => {
     const [show, setShow] = useState('類別');
     const [query, setQuery] = useState(''); //for search bar
     const [showList, setShowList] = useState({
-        '分類方式': [], '類別': [],
-
-        '商業及管理學門': [], '教育學門': [], '工程學門': [], '社會及行為科學學門': [], '民生學門': [], '人文學門': [],
-        '電算機學門': [], '法律學門': [], '藝術學門': [], '社會服務學門': [], '傳播學門': [], '醫藥衛生學門': [], '設計學門': [],
-        '建築及都市規劃學門': [], '農業科學學門': [], '運輸服務學門': [], '自然科學學門': [], '數學及統計學門': [],
-        '生命科學學門': [], '環境保護學門': [], '軍警國防安全學門': [], '其他學門': [], '獸醫學門': [],
-
-        '飲料類': [], '食物類': [], '兌換卷類': [], '服裝飾品類': [], '美妝保養類': [], '圖書類': [],
-        '日用品類': [], '運動戶外類': [], '現金類': [],'無抽獎活動': [], '搜尋結果': [],
+        '分類方式': [],
+        '類別': [],
+        '美國': [],
+        '澳洲': [],
+        '紐西蘭': [],
+        '加拿大': [],
+        '英國': [],
+        '日本': [],
+        '德國': [],
+        '搜尋結果': []
     });
     
-    const keywordType = ['分類方式', '以領域搜尋', '以獎品搜尋'];
-    const field_list = ['類別', '商業及管理學門', '教育學門', '工程學門', '社會及行為科學學門', '民生學門', '人文學門',
-                        '電算機學門', '法律學門', '藝術學門', '社會服務學門', '傳播學門', '醫藥衛生學門', '設計學門',
-                        '建築及都市規劃學門', '農業科學學門', '運輸服務學門', '自然科學學門', '數學及統計學門',
-                        '生命科學學門', '環境保護學門', '軍警國防安全學門', '其他學門', '獸醫學門'];
-    const gift_list = ['類別', '飲料類', '食物類', '兌換卷類', '服裝飾品類', '3C類', '美妝保養類',
-                    '圖書類','日用品類', '運動戶外類', '現金類', '無抽獎活動'];
+    const keywordType = ['分類方式', '以國家搜尋'];
+    const field_list = ['類別', '美國', '澳洲', '紐西蘭', '加拿大', '英國', '日本', '德國',];
+    // const gift_list = ['類別', '飲料類', '食物類', '兌換卷類', '服裝飾品類', '3C類', '美妝保養類',
+    //                 '圖書類','日用品類', '運動戶外類', '現金類', '無抽獎活動'];
                     
 
     useEffect(() => {
         const fetchData = async () => {
             setload(true)
-            let data = await fetch('https://be-sdmg4.herokuapp.com/home',{
+            let data = await fetch('/home',{
                 headers: {'Content-Type': 'application/json'}
             });
 
             field_list.forEach(async item => {
-                const data = await fetch(`https://be-sdmg4.herokuapp.com/GetFormByKeyWord?KeywordType=field&Keyword=${item}`);
+                const data = await fetch(`/GetCategoryPost?category=${item}`);
                 const dataJSON = await data.json();
                 setShowList(prevShowList => {
                     let curShowList = prevShowList;
@@ -53,18 +51,19 @@ const Explore = ( ) => {
                     return curShowList;
                 });
             });
-            gift_list.forEach(async item => {
-                const data = await fetch(`https://be-sdmg4.herokuapp.com/GetFormByKeyWord?KeywordType=tag&Keyword=${item}`);
-                const dataJSON = await data.json();
-                setShowList(prevShowList => {
-                    let curShowList = prevShowList;
-                    curShowList[item] = dataJSON;
-                    return curShowList;
-                });
-            });
+            // gift_list.forEach(async item => {
+            //     const data = await fetch(`https://be-sdmg4.herokuapp.com/GetFormByKeyWord?KeywordType=tag&Keyword=${item}`);
+            //     const dataJSON = await data.json();
+            //     setShowList(prevShowList => {
+            //         let curShowList = prevShowList;
+            //         curShowList[item] = dataJSON;
+            //         return curShowList;
+            //     });
+            // });
 
             setload(false)
             let dataJSON = await data.json();
+            console.log("Test=", dataJSON)
             setShowList( prevShowList => {
                 return {
                     ...prevShowList,
@@ -94,8 +93,8 @@ const Explore = ( ) => {
                         console.log(showList)
                         setShow(e.currentTarget.value)
                     }}>
-                        {type === '以獎品搜尋'
-                            ?  gift_list.map(item => {return (<option value={item}>{t(item)}</option>);})
+                        {type === '以國家搜尋'
+                            ?  field_list.map(item => {return (<option value={item}>{t(item)}</option>);})
                             : field_list.map(item => {return (<option value={item}>{t(item)}</option>);})
                         }
                         </select>
@@ -109,7 +108,8 @@ const Explore = ( ) => {
                     }}
                     onKeyDown={async e => {
                         if (e.key !== 'Enter') return;
-                        const data = await fetch(`https://be-sdmg4.herokuapp.com/explore?keyword=${e.currentTarget.value}`);
+                        console.log("TESTTTTT: ",e.currentTarget.value)
+                        const data = await fetch(`/GetKeywordPost?keyword=${e.currentTarget.value}`);
                         const dataJSON = await data.json();
                         setShowList(prevShowList => {
                             let curShowList = prevShowList;

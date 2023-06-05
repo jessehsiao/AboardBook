@@ -28,9 +28,9 @@ class AppCdkStack(Stack):
             self,
             'backend-service',
             cluster=ecs_cluster,
-            memory_limit_mib=2048,
+            memory_limit_mib=3072,
             desired_count=1,
-            cpu=512,
+            cpu=1024,
             task_image_options=ecs_patterns.ApplicationLoadBalancedTaskImageOptions(
                 image=ecs.ContainerImage.from_ecr_repository(ecr_repository, tag='aboardbook-backend-latest'),
                 container_port=5000,
@@ -42,23 +42,23 @@ class AppCdkStack(Stack):
             self,
             'frontend-service',
             cluster=ecs_cluster,
-            memory_limit_mib=2048,
+            memory_limit_mib=3072,
             desired_count=1,
-            cpu=512,
+            cpu=1024,
             task_image_options=ecs_patterns.ApplicationLoadBalancedTaskImageOptions(
                 image=ecs.ContainerImage.from_ecr_repository(ecr_repository, tag='aboardbook-frontend-latest'),
                 container_port=3000,
                 container_name='aboardbook-frontend'
             )
         )
-
+        '''
         backend_service.target_group.configure_health_check(
             healthy_threshold_count=2,
             unhealthy_threshold_count=2,
             timeout=Duration.seconds(10),
             interval=Duration.seconds(11)
         )
-
+        
         frontend_service.target_group.configure_health_check(
             healthy_threshold_count=2,
             unhealthy_threshold_count=3,
@@ -66,9 +66,10 @@ class AppCdkStack(Stack):
             timeout=Duration.seconds(10),
             interval=Duration.seconds(11)
         )
+        '''
 
-        backend_service.target_group.set_attribute('deregistration_delay.timeout_seconds', '5')
-        frontend_service.target_group.set_attribute('deregistration_delay.timeout_seconds', '5')
+        #backend_service.target_group.set_attribute('deregistration_delay.timeout_seconds', '5')
+        #frontend_service.target_group.set_attribute('deregistration_delay.timeout_seconds', '5')
 
 
         service = [backend_service, frontend_service]

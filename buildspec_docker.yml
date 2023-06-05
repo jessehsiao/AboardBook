@@ -29,6 +29,6 @@ phases:
       - docker push $IMAGE_REPO_URI:$IMAGE_TAG_FRONTEND
       - echo Writing image definitions file...
       - printf '[{"name":"aboardbook-backend","imageUri":"%s"}]' $IMAGE_REPO_URI:$IMAGE_TAG_BACKEND > $CODEBUILD_SRC_DIR/imagedefinitions.json
-      - printf '[{"name":"aboardbook-frontend","imageUri":"%s"}]' $IMAGE_REPO_URI:$IMAGE_TAG_FRONTEND > $CODEBUILD_SRC_DIR/imagedefinitions.json
+
 artifacts:
   files: imagedefinitions.json

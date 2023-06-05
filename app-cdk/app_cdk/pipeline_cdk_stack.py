@@ -50,7 +50,7 @@ class PipelineCdkStack(Stack):
 
 
         docker_build_project_backend = codebuild.PipelineProject(
-            self, "Docker Build",
+            self, "Docker Build Backend",
             build_spec=codebuild.BuildSpec.from_source_filename("./buildspec_docker_backend.yml"),
             environment=codebuild.BuildEnvironment(
                 build_image=codebuild.LinuxBuildImage.STANDARD_5_0,
@@ -74,7 +74,7 @@ class PipelineCdkStack(Stack):
         )
 
         docker_build_project_frontend = codebuild.PipelineProject(
-            self, "Docker Build",
+            self, "Docker Build Frontend",
             build_spec=codebuild.BuildSpec.from_source_filename("./buildspec_docker_frontend.yml"),
             environment=codebuild.BuildEnvironment(
                 build_image=codebuild.LinuxBuildImage.STANDARD_5_0,
@@ -144,7 +144,7 @@ class PipelineCdkStack(Stack):
         )
 
         docker_build_action_backend = codepipeline_actions.CodeBuildAction(
-            action_name="Docker-Build",
+            action_name="Docker-Build-Backend",
             project=docker_build_project_backend,
             input=source_output,
             outputs=[docker_build_output_backend],
@@ -152,7 +152,7 @@ class PipelineCdkStack(Stack):
         )
 
         docker_build_action_frontend = codepipeline_actions.CodeBuildAction(
-            action_name="Docker-Build",
+            action_name="Docker-Build-Frontend",
             project=docker_build_project_frontend,
             input=docker_build_output_backend,
             outputs=[docker_build_output_frontend],

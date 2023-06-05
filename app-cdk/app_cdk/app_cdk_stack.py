@@ -61,7 +61,8 @@ class AppCdkStack(Stack):
 
         frontend_service.target_group.configure_health_check(
             healthy_threshold_count=2,
-            unhealthy_threshold_count=2,
+            unhealthy_threshold_count=3,
+            port='80',
             timeout=Duration.seconds(10),
             interval=Duration.seconds(11)
         )

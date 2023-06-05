@@ -6,8 +6,6 @@ ENV PATH /user/src/app/node_modules/.bin:$PATH
 
 COPY ./package.json /user/src/app/package.json
 
-COPY ./yarn.lock /user/src/app/yarn.lock
-
 RUN npm install --silent
 RUN npm install react-scripts --silent
 

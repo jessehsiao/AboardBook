@@ -154,7 +154,7 @@ class PipelineCdkStack(Stack):
         docker_build_action_frontend = codepipeline_actions.CodeBuildAction(
             action_name="Docker-Build-Frontend",
             project=docker_build_project_frontend,
-            input=docker_build_output_backend,
+            input=source_output,
             outputs=[docker_build_output_frontend],
             run_order = 2
         )
@@ -181,7 +181,7 @@ class PipelineCdkStack(Stack):
             codepipeline_actions.EcsDeployAction(
                 action_name='Deploy-Test-Backend',
                 service=test_app_fargate[0].service,
-                input=docker_build_output_frontend,
+                input=docker_build_output_backend,
                 run_order=1
             ), 
             codepipeline_actions.EcsDeployAction(

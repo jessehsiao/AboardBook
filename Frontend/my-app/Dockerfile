@@ -2,6 +2,7 @@ FROM node:14-slim
 
 WORKDIR /user/src/app 
 VOLUME [ "/user/src/app/node_modules" ]
+ENV PATH /user/src/app/node_modules/.bin:$PATH
 
 COPY ./package.json /user/src/app/package.json
 

@@ -20,7 +20,9 @@ test_aboardbook_stack = AppCdkStack(
 PipelineCdkStack(
     app,
     "pipeline-stack-AboardBook",
-    ecr_repository=ecr_stack.ecr_data
+    ecr_repository=ecr_stack.ecr_data,
+    test_app_fargate = test_aboardbook_stack.ecs_service_data
+
 )
 
 app.synth()

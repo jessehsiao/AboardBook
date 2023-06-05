@@ -11,7 +11,7 @@ import os
 
 class PipelineCdkStack(Stack):
 
-    def __init__(self, scope: Construct, id: str, ecr_repository, **kwargs) -> None:
+    def __init__(self, scope: Construct, id: str, ecr_repository, test_app_fargate, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
         # Create a new CodePipeline called CICD_Pipeline
@@ -125,3 +125,24 @@ class PipelineCdkStack(Stack):
             stage_name="Docker-Build",
             actions=[docker_build_action]
         )
+
+
+        pipeline.add_stage(
+          stage_name='Deploy-Test-ENV',
+          actions=[
+            codepipeline_actions.EcsDeployAction(
+                action_name='Deploy-Test-Backend',
+                service=test_app_fargate[0].service,
+                input=docker_build_output,
+                run_order=1
+            ), 
+            codepipeline_actions.EcsDeployAction(
+                action_name='Deploy-Test-Frontend',
+                service=test_app_fargate[1].service,
+                input=docker_build_output,
+                run_order=2
+            )
+          ]
+        )
+        
+        

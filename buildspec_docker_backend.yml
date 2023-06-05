@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.9
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $IMAGE_REPO_URI
+  build:
+    commands:
+      - cd ./Backend/my-app
+      - echo Build started on `date`
+      - echo Building the Backend Docker image...
+      - docker build -t myapp-backend:$IMAGE_TAG_BACKEND .
+      - docker tag myapp-backend:$IMAGE_TAG_BACKEND $IMAGE_REPO_URI:$IMAGE_TAG_BACKEND
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $IMAGE_REPO_URI:$IMAGE_TAG_BACKEND
+      - echo Writing image definitions file...
+      - printf '[{"name":"aboardbook-backend","imageUri":"%s"}]' $IMAGE_REPO_URI:$IMAGE_TAG_BACKEND > $CODEBUILD_SRC_DIR/imagedefinitions.json
+
+artifacts:
+  files: imagedefinitions.json

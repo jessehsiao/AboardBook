@@ -10,12 +10,7 @@ phases:
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $IMAGE_REPO_URI
   build:
     commands:
-      - cd ./Backend/my-app
-      - echo Build started on `date`
-      - echo Building the Backend Docker image...
-      - docker build -t myapp-backend:$IMAGE_TAG_BACKEND .
-      - docker tag myapp-backend:$IMAGE_TAG_BACKEND $IMAGE_REPO_URI:$IMAGE_TAG_BACKEND
-      - cd ../../Frontend/my-app
+      - cd ./Frontend/my-app
       - echo Build started on `date`
       - echo Building the Frontend Docker image...
       - docker build -t myapp-frontend:$IMAGE_TAG_FRONTEND .
@@ -25,10 +20,9 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $IMAGE_REPO_URI:$IMAGE_TAG_BACKEND
       - docker push $IMAGE_REPO_URI:$IMAGE_TAG_FRONTEND
       - echo Writing image definitions file...
-      - printf '[{"name":"aboardbook-backend","imageUri":"%s"}]' $IMAGE_REPO_URI:$IMAGE_TAG_BACKEND > $CODEBUILD_SRC_DIR/imagedefinitions.json
+      - printf '[{"name":"aboardbook-frontend","imageUri":"%s"}]' $IMAGE_REPO_URI:$IMAGE_TAG_FRONTEND > $CODEBUILD_SRC_DIR/imagedefinitions.json
 
 artifacts:
   files: imagedefinitions.json

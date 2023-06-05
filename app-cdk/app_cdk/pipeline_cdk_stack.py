@@ -22,7 +22,8 @@ class PipelineCdkStack(Stack):
 
         source_output = codepipeline.Artifact()
         unit_test_output = codepipeline.Artifact()
-        docker_build_output = codepipeline.Artifact()
+        docker_build_output_backend = codepipeline.Artifact()
+        docker_build_output_frontend = codepipeline.Artifact()
 
 
         # Pipeline code will go here
@@ -48,9 +49,9 @@ class PipelineCdkStack(Stack):
         )
 
 
-        docker_build_project = codebuild.PipelineProject(
+        docker_build_project_backend = codebuild.PipelineProject(
             self, "Docker Build",
-            build_spec=codebuild.BuildSpec.from_source_filename("./buildspec_docker.yml"),
+            build_spec=codebuild.BuildSpec.from_source_filename("./buildspec_docker_backend.yml"),
             environment=codebuild.BuildEnvironment(
                 build_image=codebuild.LinuxBuildImage.STANDARD_5_0,
                 privileged=True,
@@ -60,6 +61,26 @@ class PipelineCdkStack(Stack):
                         type=codebuild.BuildEnvironmentVariableType.PLAINTEXT,
                         value='aboardbook-backend-latest'
                     ),
+                    "IMAGE_REPO_URI": codebuild.BuildEnvironmentVariable(
+                        type=codebuild.BuildEnvironmentVariableType.PLAINTEXT,
+                        value=ecr_repository.repository_uri
+                    ),
+                    "AWS_DEFAULT_REGION": codebuild.BuildEnvironmentVariable(
+                        type=codebuild.BuildEnvironmentVariableType.PLAINTEXT,
+                        value=os.environ["CDK_DEFAULT_REGION"]
+                    )
+                }
+            ),
+        )
+
+        docker_build_project_frontend = codebuild.PipelineProject(
+            self, "Docker Build",
+            build_spec=codebuild.BuildSpec.from_source_filename("./buildspec_docker_frontend.yml"),
+            environment=codebuild.BuildEnvironment(
+                build_image=codebuild.LinuxBuildImage.STANDARD_5_0,
+                privileged=True,
+                compute_type=codebuild.ComputeType.LARGE,
+                environment_variables={
                     "IMAGE_TAG_FRONTEND": codebuild.BuildEnvironmentVariable(
                         type=codebuild.BuildEnvironmentVariableType.PLAINTEXT,
                         value='aboardbook-frontend-latest'
@@ -76,7 +97,26 @@ class PipelineCdkStack(Stack):
             ),
         )
 
-        docker_build_project.add_to_role_policy(iam.PolicyStatement(
+        docker_build_project_backend.add_to_role_policy(iam.PolicyStatement(
+            effect=iam.Effect.ALLOW,
+            actions=[
+                "ecr:GetAuthorizationToken",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:GetRepositoryPolicy",
+                "ecr:DescribeRepositories",
+                "ecr:ListImages",
+                "ecr:DescribeImages",
+                "ecr:BatchGetImage",
+                "ecr:InitiateLayerUpload",
+                "ecr:UploadLayerPart",
+                "ecr:CompleteLayerUpload",
+                "ecr:PutImage"
+            ],
+            resources=['*'],
+        ))
+
+        docker_build_project_frontend.add_to_role_policy(iam.PolicyStatement(
             effect=iam.Effect.ALLOW,
             actions=[
                 "ecr:GetAuthorizationToken",
@@ -103,13 +143,21 @@ class PipelineCdkStack(Stack):
             outputs=[unit_test_output]
         )
 
-        docker_build_action = codepipeline_actions.CodeBuildAction(
+        docker_build_action_backend = codepipeline_actions.CodeBuildAction(
             action_name="Docker-Build",
-            project=docker_build_project,
+            project=docker_build_project_backend,
             input=source_output,
-            outputs=[docker_build_output]
+            outputs=[docker_build_output_backend],
+            run_order = 1
         )
 
+        docker_build_action_frontend = codepipeline_actions.CodeBuildAction(
+            action_name="Docker-Build",
+            project=docker_build_project_frontend,
+            input=docker_build_output_backend,
+            outputs=[docker_build_output_frontend],
+            run_order = 2
+        )
 
         pipeline.add_stage(
             stage_name = "Source",
@@ -123,7 +171,7 @@ class PipelineCdkStack(Stack):
 
         pipeline.add_stage(
             stage_name="Docker-Build",
-            actions=[docker_build_action]
+            actions=[docker_build_action_backend, docker_build_action_frontend]
         )
 
 
@@ -133,13 +181,13 @@ class PipelineCdkStack(Stack):
             codepipeline_actions.EcsDeployAction(
                 action_name='Deploy-Test-Backend',
                 service=test_app_fargate[0].service,
-                input=docker_build_output,
+                input=docker_build_output_frontend,
                 run_order=1
             ), 
             codepipeline_actions.EcsDeployAction(
                 action_name='Deploy-Test-Frontend',
                 service=test_app_fargate[1].service,
-                input=docker_build_output,
+                input=docker_build_output_frontend,
                 run_order=2
             )
           ]

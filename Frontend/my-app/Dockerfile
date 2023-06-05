@@ -9,6 +9,7 @@ COPY ./package.json /user/src/app/package.json
 COPY ./yarn.lock /user/src/app/yarn.lock
 
 RUN npm install --silent
+RUN npm install react-scripts --silent
 
 COPY . /user/src/app
 

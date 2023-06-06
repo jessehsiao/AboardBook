@@ -18,7 +18,7 @@ function LoginModal( {closeModal}){
     const callLoginApi = async (e) => {
         setload(true)
         e.preventDefault();
-        const result = await fetch("/Login", {
+        const result = await fetch("/api/Login", {
             method: "POST",
             body: JSON.stringify({
                 email: email,

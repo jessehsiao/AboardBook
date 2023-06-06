@@ -43,7 +43,7 @@ const Form = () => {
     const handleSubmitComment = async (event) => {
         event.preventDefault();
         try {
-          const response = await fetch(`/InsertComent`, {
+          const response = await fetch(`/api/InsertComent`, {
             method: 'POST',
             headers: {
               Authorization: `Bearer ${localStorage.getItem('jwt')}`
@@ -121,7 +121,7 @@ const Form = () => {
     const fetchFormDetail = async () => {
         try {
             const response = await fetch(
-                `/GetPostById?post_id=${encodeURIComponent(POST_ID)}`,
+                `/api/GetPostById?post_id=${encodeURIComponent(POST_ID)}`,
                 {
                     method: "GET",
                     headers: {

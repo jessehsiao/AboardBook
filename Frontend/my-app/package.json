@@ -1,9 +1,8 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "allowedHosts": "all",
-  "proxy": "http://server:5000",
   "private": true,
+  "proxy": "http://server:5000",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.0",
     "@date-io/date-fns": "^2.14.0",
@@ -75,6 +74,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "options": {
+    "allowedHosts": ["server"]
   }
-  
+
 }

@@ -3,7 +3,6 @@ import { Footer } from './Components/Footer';
 import "../css/Instruction.css";
 import { useTranslation } from "react-i18next";
 import { Trans } from "react-i18next";
-import React from 'react';
 
 
 const Instruction = () => {

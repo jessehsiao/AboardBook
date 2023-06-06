@@ -1,5 +1,4 @@
 import '../../css/CopyMessage.css';
-import React from 'react';
 
 const CopyMessage = () => {
 

@@ -14,7 +14,7 @@ services:
     ports: 
       - "3000:3000"
     volumes: 
-      - ./Frontend/my-app:/user/src/app
+      - ./Frontend/my-app:/user/src/app 
 
     depends_on: 
       - server

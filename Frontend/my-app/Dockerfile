@@ -1,13 +1,17 @@
-FROM public.ecr.aws/docker/library/node:18-alpine AS development
-ENV NODE_ENV development
+FROM node:14-slim
 
-WORKDIR /app
-COPY package.json .
-RUN npm install
-RUN mkdir node_modules/.cache && chmod -R 777 node_modules/.cache
+WORKDIR /user/src/app 
+VOLUME [ "/user/src/app/node_modules" ]
+ENV PATH /user/src/app/node_modules/.bin:$PATH
 
-COPY . .
+COPY ./package.json /user/src/app/package.json
+
+RUN npm install --silent
+
+COPY . /user/src/app
 
 EXPOSE 3000
 
-CMD [ "npm", "start" ]
+ENTRYPOINT [ "npm" ]
+
+CMD ["start"]

@@ -12,7 +12,7 @@ RUN npm install --silent
 
 COPY . /user/src/app
 
-EXPOSE 80
+EXPOSE 3000
 
 ENTRYPOINT [ "npm" ]
 

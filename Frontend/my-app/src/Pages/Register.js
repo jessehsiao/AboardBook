@@ -73,7 +73,7 @@ const Register = () => {
         // }
 
         e.preventDefault();
-        const result = await fetch("http://test-backe-1rvpta6oaz83r-1059725582.ap-northeast-1.elb.amazonaws.com/Register", {
+        const result = await fetch("/Register", {
             method: "POST",
             body: JSON.stringify({
                 email: email,

@@ -73,7 +73,7 @@ const Register = () => {
         // }
 
         e.preventDefault();
-        const result = await fetch("/Register", {
+        const result = await fetch("/api/Register", {
             method: "POST",
             body: JSON.stringify({
                 email: email,

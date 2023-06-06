@@ -28,7 +28,7 @@ const Homepage = () => {
 
         const fetchData = async () => {
             console.log("Exe success");
-            let data = await fetch('/home',{
+            let data = await fetch('/api/home',{
                 
                 headers: {'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'}

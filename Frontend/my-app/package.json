@@ -1,7 +1,6 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "proxy": "http://server:5000",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.0",
@@ -21,6 +20,7 @@
     "cropperjs": "^1.5.12",
     "file-saver": "^2.0.5",
     "highcharts-wordcloud": "^0.1.7",
+    "http-proxy-middleware": "^2.0.6",
     "i": "^0.3.7",
     "i18next": "^21.8.3",
     "i18next-http-backend": "^1.4.0",
@@ -75,5 +75,4 @@
       "last 1 safari version"
     ]
   }
-  
 }

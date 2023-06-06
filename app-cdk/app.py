@@ -13,7 +13,7 @@ ecr_stack = EcrCdkStack(app, 'ecr-stack')
 
 test_aboardbook_stack = AppCdkStack(
     app,
-    'test-aboardbook-stack',
+    'testEnv-aboardbook-stack',
     ecr_repository=ecr_stack.ecr_data
 )
 

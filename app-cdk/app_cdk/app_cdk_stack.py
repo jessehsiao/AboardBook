@@ -45,6 +45,7 @@ class AppCdkStack(Stack):
             memory_limit_mib=3072,
             desired_count=1,
             cpu=1024,
+            health_check_grace_period = Duration.seconds(120),
             task_image_options=ecs_patterns.ApplicationLoadBalancedTaskImageOptions(
                 image=ecs.ContainerImage.from_ecr_repository(ecr_repository, tag='aboardbook-frontend-latest'),
                 container_port=3000,

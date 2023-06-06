@@ -8,6 +8,7 @@ import { CopyMessage } from './Components/CopyMessage';
 
 import { useTranslation } from "react-i18next";
 import ReactLoading from "react-loading";
+import React from 'react';
 
 const Explore = ( ) => {
     const { t, i18n } = useTranslation();

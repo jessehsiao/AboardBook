@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Avator = ({user_name, user_pic_url}) => {
     
     return (

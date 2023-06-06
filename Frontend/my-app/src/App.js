@@ -13,6 +13,7 @@ import { Form } from './Pages/Form'
 import { MakePost } from './Pages/MakePost'
 //import { SendEmail } from './Pages/SendEmail';
 import  { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React from 'react';
 
 const App = () => {
   return (

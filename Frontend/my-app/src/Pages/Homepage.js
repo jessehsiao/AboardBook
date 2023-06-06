@@ -28,7 +28,7 @@ const Homepage = () => {
 
         const fetchData = async () => {
       
-            let data = await fetch('http://test-backe-4srkr5qxt5b1-1607199291.ap-northeast-1.elb.amazonaws.com/home',{
+            let data = await fetch('/home',{
                 
                 headers: {'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'}

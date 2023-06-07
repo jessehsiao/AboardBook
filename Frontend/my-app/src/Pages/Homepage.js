@@ -66,7 +66,7 @@ const Homepage = () => {
             setModalOpen(true);
         }
         else{
-            window.location.href = "/MakeSurvey";
+            window.location.href = "/MakePost";
         }
     }
 

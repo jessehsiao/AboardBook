@@ -94,6 +94,28 @@ def addPost(post_title, post_content, post_time, category_name):
     finally:
         db.close()
 
+
+def getPostIdByUserIdTitle(user_id, title):
+    db = get_db()
+    cursor = db.cursor(cursor=pymysql.cursors.DictCursor)
+    try:    
+        query = '''
+        SELECT post_id
+        FROM Post
+        WHERE user_id = (%s) and title = (%s);
+        '''
+        cursor.execute(query, [user_id[0]["user_id"], title])
+        db.commit()
+        return cursor.fetchall()
+    except pymysql.Error as e:
+        db.rollback()
+        return 'Failed to retrieve post id.'
+    finally:
+        db.close()
+    
+
+
+
 @post_bp.route('/CreatePost', methods=['POST'])
 def CreatePost():
     req_json = request.get_json(force=True)
@@ -109,8 +131,13 @@ def CreatePost():
 
     post_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     if addPost(post_title, post_content, post_time, post_cat):
+        user_email = protected()
+        user_id = getUserIdByEmail(user_email)
+        post_id = getPostIdByUserIdTitle(user_id, post_title)
+
         response["status"] = 'success'
         response["message"] = '文章撰寫成功！'
+        response["post_id"] = post_id[0]['post_id']
     else:
         response["status"] = 'fail'
         response["message"] = '文章撰寫失敗'

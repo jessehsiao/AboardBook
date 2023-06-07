@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { Breadcrumb } from 'react-bootstrap';
 import { Footer } from './Components/Footer';
 import Select from "react-select";
+import { Form } from 'react-router-dom';
 
 
 
@@ -34,7 +35,7 @@ const MakePost = () =>{
 
 
 
-    const handleSubmit = event =>{
+    const handleSubmit = async(event) =>{
         /*
         submit to the next page
         */
@@ -42,25 +43,44 @@ const MakePost = () =>{
             alert("欄位不得為空")
         }
         else{
-
-            let form={
-                user_id:'Still not sure',
-                category:cat,
-                title:postTitle,
-                content:postContent
+            let form_dict={
+                "category":cat,
+                "title":postTitle,
+                "content":postContent
             }
-            console.log(form)
-            
-
+            console.log(form_dict)
+            try {
+                const response = await fetch(`/api/CreatePost`, {
+                    method: 'POST',
+                    headers: {
+                    Authorization: `Bearer ${localStorage.getItem('jwt')}`
+                    },
+                    body: JSON.stringify(form_dict),
+                });
+                const dataJSON = await response.json();
+                if (response.ok) {
+                    alert("發布完成")
+                    console.log(response)
+                    console.log(dataJSON)
+                    window.location.href = '/form/' + dataJSON["post_id"];
+                    
+                } else {
+                    console.log("ERROR")
+                }
+            } catch (error) {
+                console.log('發生錯誤:', error);
+            }
             event.preventDefault();
-            window.sessionStorage.setItem('form', JSON.stringify(form));
-            //window.location.href = '/MakeSurvey2';//暫時用jS去寫換頁
         }
     }
     const options = [
-        { value: "England", label: "英國" },
-        { value: "America", label: "美國" },
-        { value: "Japan", label: "日本" },
+        { value: "澳洲", label: "澳洲" },
+        { value: "美國", label: "美國" },
+        { value: "紐西蘭", label: "紐西蘭" },
+        { value: "加拿大", label: "加拿大" },
+        { value: "英國", label: "英國" },
+        { value: "日本", label: "日本" },
+        { value: "德國", label: "德國" },
       ];
 
 

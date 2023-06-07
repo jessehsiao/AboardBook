@@ -1,7 +1,5 @@
 import './App.css';
 import { Homepage } from './Pages/Homepage';
-import { MakeSurvey } from './Pages/MakeSurvey';
-import { MakeSurvey2 } from './Pages/MakeSurvey2';
 import SurveyManagement from './Pages/SurveyManagement';
 import { Register } from './Pages/Register';
 import { Instruction } from './Pages/Instruction';
@@ -32,10 +30,10 @@ const App = () => {
         {/*<Route path='/MakeSurvey' element={<MakeSurvey/>}/>*/}
         {/*<Route path='/MakeSurvey2' element={<MakeSurvey2/>}/>*/}
         
-        <Route path='/Profile' element={<Profile/>}/>
+        {/*<Route path='/Profile' element={<Profile/>}/>*/}
         <Route path='/explore' element={<Explore/>}/>
         <Route path='/ForgetPassword' element={<ForgetPassword/>}/>
-        <Route path='/editProfile' element={<EditProfile/>}/>
+        {/*<Route path='/editProfile' element={<EditProfile/>}/>*/}
       </Routes>
     </Router>
     

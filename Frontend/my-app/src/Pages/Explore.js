@@ -39,12 +39,12 @@ const Explore = ( ) => {
     useEffect(() => {
         const fetchData = async () => {
             setload(true)
-            let data = await fetch('/home',{
+            let data = await fetch('/api/home',{
                 headers: {'Content-Type': 'application/json'}
             });
 
             field_list.forEach(async item => {
-                const data = await fetch(`/GetCategoryPost?category=${item}`);
+                const data = await fetch(`/api/GetCategoryPost?category=${item}`);
                 const dataJSON = await data.json();
                 setShowList(prevShowList => {
                     let curShowList = prevShowList;
@@ -110,7 +110,7 @@ const Explore = ( ) => {
                     onKeyDown={async e => {
                         if (e.key !== 'Enter') return;
                         console.log("TESTTTTT: ",e.currentTarget.value)
-                        const data = await fetch(`/GetKeywordPost?keyword=${e.currentTarget.value}`);
+                        const data = await fetch(`/api/GetKeywordPost?keyword=${e.currentTarget.value}`);
                         const dataJSON = await data.json();
                         setShowList(prevShowList => {
                             let curShowList = prevShowList;

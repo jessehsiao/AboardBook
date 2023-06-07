@@ -127,7 +127,7 @@ const Navbar = () => {
                         </div>
                         <div className='navbar-links'>
                             <NavLink className={(navData) => navData.isActive ? 'active-nav-option' : 'nav-option'} to='/explore' onClick={clearform}> {t("探索文章")} </NavLink>
-                            <NavLink className={(navData) => navData.isActive ? 'active-nav-option' : 'nav-option'} to='/MakeSurvey' onClick={clearform}> {t("發表文章")}  </NavLink>
+                            {/*<NavLink className={(navData) => navData.isActive ? 'active-nav-option' : 'nav-option'} to='/MakePost' onClick={clearform}> {t("發表文章")}  </NavLink>*/}
                             {/* <NavLink className={(navData) => navData.isActive ? 'active-nav-option' : 'nav-option'} to='/Instruction' onClick={clearform}> {t("說明")} </NavLink> */}
                             <div className="nav-option user-dropdown">
                                 {t("會員")}

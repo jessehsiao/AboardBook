@@ -50,28 +50,6 @@ const Register = () => {
 
     const callregisterApi = async (e) => {
 
-        // const formdata = new FormData() 
-        // formdata.append("image", image.img)
-
-        // //上傳照片到imgur
-        // e.preventDefault();
-        // const imgururl_result = await fetch('https://api.imgur.com/3/image/', {
-        //     method:"POST",
-        //     headers:{
-        //         Authorization: "Client-ID 5535a8facba4790"
-        //     },
-        //     body: formdata
-            
-        // })
-        
-        // if(imgururl_result.status === 429){
-        //     var imgururl = ""
-        // }else{
-        //     let data = await imgururl_result.json();
-        //     var imgururl = data.data.link
-        //     console.log(imgururl)        
-        // }
-
         e.preventDefault();
         const result = await fetch("/api/Register", {
             method: "POST",

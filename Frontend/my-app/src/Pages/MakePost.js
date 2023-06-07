@@ -13,8 +13,7 @@ import { Form } from 'react-router-dom';
 
 
 const MakePost = () =>{
-    //const [myTasks, moveMyTask] = useState(props.tasks);
-    //const [storedElements, setStoredElements] = useState([]);
+
     const [cat, setCat] = useState("")
     const [postTitle, setPostTitle] = useState("")
     const [postContent, setContent] = useState("")

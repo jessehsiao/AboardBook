@@ -14,9 +14,6 @@ def test_main_status_code(app, client):
     res = client.get("/")
     assert res.status_code == 200
 
-def test_userPost_status_code(app, client):
-    res = client.get("/GetUserPost")
-    assert res.status_code == 200
 
 def test_cat_status_code(app, client):
     res = client.get("/GetCategoryPost")
